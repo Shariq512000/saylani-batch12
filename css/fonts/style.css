@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Ephesis&display=swap');
+@font-face {
+    font-family: 'ephesis';
+    src: url('Ephesis-Regular.ttf');
+}
+
+h1{
+    text-align: center;
+}
+
+#para{
+    text-transform: lowercase;
+    font-size: 50px;
+    font-weight: 700;
+    word-spacing: 50px;
+    text-indent: 200px;
+}
+
+.deco{
+    font-size: 60px;
+    text-shadow: -5px 15px 5px #000000;
+}
+.deco:first-letter{
+    font-size: 100px;
+    color: red;
+}
+/* a{
+    font-size: 32px;
+    color: black;
+    text-decoration: none;
+} */
+
+.anc{
+    text-align: center;
+}
+
+.ps{
+    font-size: 50px;
+}
+
+ul li a{
+    font-size: 32px;
+}
+ul li a:visited{
+    color: #000000;
+}
+.ps:first-line{
+    color: blue;
+}
+
+button{
+    background-color: blue;
+    color: white;
+    font: 35px;
+}
+
+button:hover{
+    background-color: red;
+    color: yellow;
+}
