@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Unkempt:wght@400;700&display=swap');
+@font-face {
+    font-family: 'Xyz';
+    src: url('Ephesis-Regular.ttf');
+}
+p{
+    color: red;
+    background-color: black;
+    font-size: 50px;
+    /* font-family: 'Xyz'; */
+    font-weight: 700;
+}
+h1{
+    color: yellow;
+    background-color: blue;
+    font-size: 60px;
+    font-family: "Unkempt", cursive;
+}
