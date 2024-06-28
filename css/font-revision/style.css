@@ -5,14 +5,42 @@
 }
 p{
     color: red;
-    background-color: black;
+    /* background-color: black; */
     font-size: 50px;
     /* font-family: 'Xyz'; */
     font-weight: 700;
+    text-transform: capitalize;
+    /* text-decoration: line-through; */
+    /* line-height: 100px; */
+    /* word-spacing: 20px; */
+    /* letter-spacing: 10px; */
+    /* text-indent: 400px; */
+    text-shadow: 5px 10px 5px black;
+}
+p:first-line{
+    color: blue;
+}
+img{
+    vertical-align: text-bottom;
 }
 h1{
     color: yellow;
     background-color: blue;
     font-size: 60px;
     font-family: "Unkempt", cursive;
+    text-align: center;
+}
+a{
+    font-size: 50px;
+    text-decoration: none;
+    background: red;
+    color: blue;
+}
+a:hover{
+    color: red;
+    background-color: blue;
+    font-size: 70px;
+}
+.extra{
+    color: yellow;
 }
