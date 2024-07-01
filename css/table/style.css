@@ -1,0 +1,26 @@
+table{
+    /* background-color: skyblue; */
+    width: 600px;
+}
+table td, table th{
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+table{
+    empty-cells: hide;
+    /* border-spacing: 30px 15px; */
+    border-collapse: collapse;
+}
+table .even{
+    background-color: #c9c6c6;
+}
+
+table th{
+    color: red;
+    text-transform: uppercase;
+}
+
+table td{
+    color: blue;
+}

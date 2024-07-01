@@ -1,0 +1,22 @@
+ol > li{
+    font-size: 30px;
+    list-style-type: upper-alpha;
+}
+
+.imgUl{
+    list-style-image: url('sqpurple.gif');
+    /* list-style: none; */
+}
+.imgUl > li{
+    font-size: 30px;
+}
+
+.positionUl{
+    width: 70%;
+    /* list-style-position: inside; */
+    list-style: inside square;
+}
+
+.positionUl > li{
+    font-size: 25px;
+}
