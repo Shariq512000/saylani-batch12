@@ -1,42 +1,96 @@
 .position-container{
     border: 3px solid red;
     padding: 40px;
+    margin-top: 100px;
+    margin-bottom: 100px;
     position: relative;
+    /* height: 5555px; */
+    
 }
 
 .card{
     width: 15%;
     border: 1px solid #000;
-    /* margin-left: auto;
-    margin-right: auto; */
     text-align: center;
     padding: 30px 15px 30px 15px;
     box-shadow: 30px 20px 10px rgba(0,0,0, 0.5);
     border-radius: 8px;
     display: inline-block;
     margin-right: 30px;
-    position: relative;
-    /* border-top-right-radius: 8px 20px; */
-    /* border-radius: 16px 64px 16px 64px / 32px 16px 32px 16px; */
+    background-color: skyblue;
 }
 
 #relative{
     position: relative;
-    /* left: 50px; */
-    /* margin-left: 50px; */
-}
-.crossBtn{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-    /* background-color: gray;
-    padding: 8px;
-    border-radius: 50%; */
+    /* margin-left: 20px; */
+    /* left: 100px; */
+    /* bottom: -150px; */
 }
 
-/* #absolute{
+#absolute{
+    /* position: absolute; */
+}
+
+.crossBtn{
     position: absolute;
-    bottom: -50px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#fixed{
+    position: fixed;
+    top: 30px;
+    right: 0;
+    z-index: 2;
+}
+
+.layout{
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+    width: 100vw;
+    top: 0;
     left: 0;
-} */
+    text-align: center;
+}
+
+.layout .card{
+    margin: auto;
+}
+
+
+.navbar{
+    position: sticky;
+    top: 0;
+    border: 3px solid blue;
+    background-color: gray;
+    z-index: 3;
+}
+.navbar ul{
+    text-align: center;
+}
+.navbar ul li{
+    display: inline;
+    margin-right: 30px;
+    font-size: 20px;
+    /* color: ; */
+}
+
+.extra{
+    border: 5px solid black;
+    width: 100%;
+    height: 1500px;
+}
+
+.navWrapper{
+    position: relative;
+    border: 5px solid green;
+    padding: 25px;
+    /* height: 1700px; */
+}
+
+.navWrapper p{
+    position: relative;
+    background-color: white;
+    z-index: 1;
+}

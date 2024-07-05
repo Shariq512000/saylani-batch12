@@ -10,9 +10,9 @@ table td, table th{
 table{
     empty-cells: hide;
     /* border-spacing: 30px 15px; */
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
 }
-table .even{
+.even{
     background-color: #c9c6c6;
 }
 
@@ -21,6 +21,7 @@ table th{
     text-transform: uppercase;
 }
 
-table td{
+td, th{
     color: blue;
+    padding: 20px;
 }
