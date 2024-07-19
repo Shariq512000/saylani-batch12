@@ -1,0 +1,78 @@
+img{
+    width: 80px;
+    height: 80px;
+    vertical-align: middle;
+}
+p{
+    font-size: 18px;
+}
+p:first-letter{
+    font-size: 50px;
+}
+p:first-line{
+    color: red;
+}
+
+h1{
+    font-size: 50px;
+    text-shadow: 25px -20px 10px rgba(0,0,0,0.6);
+}
+
+li{
+    display: inline-block;
+}
+
+a{
+    color: blue;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 20px;
+}
+a:visited{
+    color: yellow;
+}
+input{
+    padding: 10px;
+    font-size: 18px;
+    color: black;
+}
+input:focus{
+    border: 3px solid red;
+    color: red;
+    outline: none;
+}
+button{
+    padding: 10px;
+    font-size: 20px;
+    background-color: rgb(83, 83, 255);
+    color: white;
+    border-radius: 6px;
+}
+
+button:hover{
+    color: rgb(83, 83, 255);
+    background-color: black;
+}
+
+.box{
+    border: 3px dashed black;
+    height: 500px;
+    overflow: auto;
+    padding: 50px 35px 20px 15px;
+    /* display: none; */
+    /* visibility: hidden; */
+    opacity: 0;
+}
+
+.box:hover{
+    /* visibility: visible; */
+    opacity: 1;
+}
+
+.box2{
+    width: 300px;
+    height: 300px;
+    background-color: blue;
+    margin: 80px;
+    box-shadow: -30px 30px 10px black;
+}
