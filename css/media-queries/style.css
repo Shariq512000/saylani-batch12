@@ -1,0 +1,48 @@
+
+body{
+    background-color: red;
+}
+h1{
+    font-size: 100px;
+}
+.mn h6{
+    font-size: 50px;
+    margin: 0;
+}
+.mn p{
+    font-size: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+    body{
+        background-color: yellow;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    body{
+        background-color: purple;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    body{
+        background-color: blue;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    body{
+        background-color: black;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    body{
+        background-color: aqua;
+    }
+}
