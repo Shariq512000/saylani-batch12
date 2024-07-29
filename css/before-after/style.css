@@ -1,0 +1,14 @@
+h1{
+    position: relative;
+}
+h1::after{
+    content: '';
+    background-image: url('tree-.jpg');
+    width: 200px;
+    height: 200px;
+    position: absolute; 
+    left: 0;
+    top: 0;
+    background-size: cover;
+    z-index: -1;
+}
