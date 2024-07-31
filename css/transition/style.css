@@ -1,0 +1,18 @@
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    /* transition-property: all;
+    transition-duration: 5s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 5s; */
+    /* transition: all 5s ease-in-out 5s; */
+    transition: width 3s ease-in-out, height 2s ease-in-out 3s, box-shadow 2s ease-in-out 5s;
+}
+
+.box:hover{
+    width: 400px;
+    height: 400px;
+    box-shadow: 10px 10px 5px #000;
+    /* transition: box-shadow 2s ease-in-out, height 2s ease-in-out 2s, width 3s ease-in-out 4s; */
+}

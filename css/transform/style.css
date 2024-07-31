@@ -1,0 +1,28 @@
+body{
+    padding-top: 200px;
+    padding-left: 200px;
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    transition: all 1s ease-in-out;
+}
+.box:hover{
+    transform: scaleX(2);
+}
+
+img{
+    height: 300px;
+    width: 300px;
+    transition: all 2s ease-in-out;
+}
+
+.xAxis:hover{
+    transform: rotateX(90deg);
+}
+
+.yAxis:hover{
+    transform: rotateY(90deg);
+}
