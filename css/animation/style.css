@@ -1,0 +1,50 @@
+:root{
+    --themeColor: #ff15ec;
+    --secondaryColor: #000000;
+}
+
+
+
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: var(--themeColor);
+    border: 5px solid var(--secondaryColor);
+    /* animation-name: boxAnimation;
+    animation-duration: 10s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: backwards; */
+    /* animation: boxAnimation 2s ease-in-out 2s infinite alternate backwards; */
+}
+p{
+    color: var(--themeColor);
+}
+
+/* .box:hover{
+    
+} */
+
+@keyframes boxAnimation {
+    0%{
+        background-color: bisque;
+    }
+    25%{
+        background-color: yellow;
+        transform: translate(100px , 0);
+    }
+    50%{
+        background-color: aqua;
+        transform: translate(100px, 100px);
+    }
+    75%{
+        background-color: purple;
+        transform: translate(200px, 100px);
+    }
+    100%{
+        background-color: blue;
+        transform: translate(200px,200px);
+    }
+}
