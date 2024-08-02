@@ -3,8 +3,6 @@
     --secondaryColor: #000000;
 }
 
-
-
 .box{
     width: 200px;
     height: 200px;
@@ -17,7 +15,7 @@
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
     animation-fill-mode: backwards; */
-    /* animation: boxAnimation 2s ease-in-out 2s infinite alternate backwards; */
+    animation: boxAnimation 2s ease-in-out 2s infinite alternate backwards;
 }
 p{
     color: var(--themeColor);
