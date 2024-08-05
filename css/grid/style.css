@@ -1,0 +1,22 @@
+.container{
+    display: grid;
+    /* height: 1000px; */
+    width: 100%;
+    background-color: red;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 250px 250px 250px;
+    gap: 20px;
+    /* justify-content: space-between; */
+}
+.items{
+    /* height: 200px; */
+    /* width: 200px; */
+    background-color: blue;
+    border: 1px solid black;
+    font-size: 40px;
+}
+
+.item1{
+    /* grid-column-start: 1;
+    grid-column-end: 4; */
+}
