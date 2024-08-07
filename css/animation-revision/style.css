@@ -1,0 +1,51 @@
+.box{
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    /* animation-name: customAnimation;
+    animation-duration: 6s;
+    animation-delay: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both; */
+    animation: customAnimation 6s ease-in-out 3s infinite alternate;
+}
+
+.d-flex{
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes customAnimation {
+    /* from{
+
+    }
+    to{
+        background-color: blue;
+    } */
+
+    0%{
+        background-color: black;
+    }
+    25%{
+        background-color: yellow;
+        transform: translate(-200px , 0);
+        border-radius: 20px;
+    }
+    50%{
+        background-color: green;
+        transform: translate(-200px , 200px);
+        border-radius: 40px;
+    }
+    75%{
+        background-color: blanchedalmond;
+        transform: translate(-400px , 200px);
+        border-radius: 60px;
+    }
+    100%{
+        background-color: blue;
+        transform: translate(-400px , 400px);
+        border-radius: 80px;
+    }
+}
