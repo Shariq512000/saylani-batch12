@@ -1,6 +1,7 @@
 
 body{
     background-color: red;
+    width: 800px;
 }
 h1{
     font-size: 100px;
@@ -13,36 +14,35 @@ h1{
     font-size: 25px;
 }
 
-@media only screen and (max-width: 600px) {
-    body{
-        background-color: yellow;
-    }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    body{
-        background-color: purple;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media (max-width: 1660px) {
     body{
         background-color: blue;
     }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    body{
-        background-color: black;
+    h1{
+        font-size: 80px;
     }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+@media (max-width: 1440px) {
     body{
-        background-color: aqua;
+        background-color: yellow;
+    }
+    h1{
+        font-size: 60px;
     }
 }
+
+@media (max-width: 1280px) {
+    body{
+        background-color: purple;
+    }
+    h1{
+        font-size: 40px;
+    }
+}
+
+/* @media (min-width: 1660px) {
+    body{
+        background-color: yellow;
+    }
+} */
