@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+</head>
+<body>
+    
+    <input type="number" id="userIput1">
+    <br>
+    <input type="number" id="userIput2">
+    <br>
+    <!-- <select id="operator">
+        <option value="sum">sum</option>
+        <option value="minus">minus</option>
+        <option value="multiply">multiply</option>
+        <option value="divide">divide</option>
+    </select> -->
+    <button onclick="addition()">addition</button>
+    <button onclick="substraction()">substraction</button>
+    <button onclick="multiplication()">multiplication</button>
+    <button onclick="divide()">division</button>
+
+    <div id="result"></div>
+
+    <script>
+        function addition(){
+            let userInput1 = document.querySelector("#userIput1").value;
+            let userInput2 = document.querySelector("#userIput2").value;
+            // let opt = document.querySelector("#operator").value;
+            let result = Number(userInput1) + Number(userInput2)
+            // console.log("opt" , opt);
+            document.querySelector("#result").innerText = result
+        }
+        function substraction(){
+            let userInput1 = document.querySelector("#userIput1").value;
+            let userInput2 = document.querySelector("#userIput2").value;
+            // let opt = document.querySelector("#operator").value;
+            let result = Number(userInput1) - Number(userInput2)
+            // console.log("opt" , opt);
+            document.querySelector("#result").innerText = result
+        }
+        function multiplication(){
+            let userInput1 = document.querySelector("#userIput1").value;
+            let userInput2 = document.querySelector("#userIput2").value;
+            // let opt = document.querySelector("#operator").value;
+            let result = Number(userInput1) * Number(userInput2)
+            // console.log("opt" , opt);
+            document.querySelector("#result").innerText = result
+        }
+        function divide(){
+            let userInput1 = document.querySelector("#userIput1").value;
+            let userInput2 = document.querySelector("#userIput2").value;
+            // let opt = document.querySelector("#operator").value;
+            let result = Number(userInput1) / Number(userInput2)
+            // console.log("opt" , opt);
+            document.querySelector("#result").innerText = result
+        }
+    </script>
+</body>
+</html>
