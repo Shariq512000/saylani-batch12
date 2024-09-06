@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6</title>
+</head>
+<body>
+    
+
+    <script>
+        let num1 = 6;
+        let num2 = 8;
+        let num3 = 0;
+        let num4 = 5;
+        //num=5
+        let result = --num1 + ++num1 + num2++ + ++num2 + num1-- + num3++ + ++num3 + --num2 + num4++ + --num4 + --num3;
+                //       5  +    6   +   8    +   10   +  6     +  0     +   2    +    9   +   5    +    5   +   1
+        //num1= 5
+        //num2= 9
+        //num3= 1
+        //num4= 5
+        //result= 57
+        console.log("num1 :" , num1, "num2 :"  , num2, "num3 :" , num3, "num4 :" , num4, "result :" , result);
+        //Hammad,Ayan//5             //9                // 1             //5                //20
+        //Umar      //5             //9                 // 1            //5                 //57    
+        //Hassan   //5             //69                 // 1           //75                 //150
+        //Rehan   //5             //9                  // 1            //5                  //57
+        //Ali Ahmed 5             //8                  // 1            //6                  //35
+        //Bilal  5                //9                  //1             //5                  //38
+        //Fahad   5              //9                  //1              //5                 //36 
+        //Saqlain 9             //17                  //1              //5                 //32
+
+
+
+
+        // agar value k end ++ aega to wo post increment hoga
+        // agar value k pehle ++ aega to wo pre increment hoga
+
+        // agar value k end -- aega to wo post decrement hoga
+        // agar value k pehle -- aega to wo pre decrement hoga
+
+
+        // agar main pehle ++ ya -- lagaoga to pehle value update krega baad mai return krega
+        // agar main baad ++ ya -- lagaoga to pehle value return krega baad mai update krega
+    </script>
+</body>
+</html>
