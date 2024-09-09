@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter7</title>
+</head>
+<body>
+    
+    <script>
+        let num1 = 8;
+        let num2 = 0;
+        let num3 = 12;
+        let result = (++num1 + num3++) * num3 + --num2 + num2-- + num3++ * num2-- + num3 - num1;
+            ///    = 21 * 13 + -1 + -1 + 13 * -2 + 14 - 9
+            ///    = 273 + -1 + -1 + -26 + 14 - 9;
+            ///    = 250
+        console.log(num1, num2, num3, result);
+
+        //////////// ---------------------- //////////////
+
+        /// Muzammil  9  -3  14  250
+        /// Ibrahim   9  -3  14  250
+
+
+        /// Umar   9  -3  14  249
+
+
+        /// Ayan      8  -3  12  256
+
+
+
+
+
+
+        ////////// ---------------------- //////////////
+
+        /// Umar      8  2  12  26 /// 
+        /// Ayan      8  2  12  46
+        /// Hammad    8  2  12  46
+        /// Shahmeer  8  1  12  46
+        /// Muzammil  9  2  12  26 ///
+        /// Ahsan     8  2  12  46
+        /// Fahad,Ali 8  2  12  26 ///
+        /// Ayan      8  2  12  46
+        /// Huzaifa   8  2  12  0
+        /// Shibil    8  4  12  94
+        /// Abdullah  8  2  12  2 
+        /// Ahsan     8  2  12  26 ///
+        /// Hassan    8  1  12   2
+    </script>
+</body>
+</html>

@@ -9,19 +9,19 @@
     
 
     <script>
-        let num1 = 6;
-        let num2 = 8;
-        let num3 = 0;
-        let num4 = 5;
-        //num=5
-        let result = --num1 + ++num1 + num2++ + ++num2 + num1-- + num3++ + ++num3 + --num2 + num4++ + --num4 + --num3;
+        // let num1 = 6;
+        // let num2 = 8;
+        // let num3 = 0;
+        // let num4 = 5;
+        // //num=5
+        // let result = --num1 + ++num1 + num2++ + ++num2 + num1-- + num3++ + ++num3 + --num2 + num4++ + --num4 + --num3;
                 //       5  +    6   +   8    +   10   +  6     +  0     +   2    +    9   +   5    +    5   +   1
         //num1= 5
         //num2= 9
         //num3= 1
         //num4= 5
         //result= 57
-        console.log("num1 :" , num1, "num2 :"  , num2, "num3 :" , num3, "num4 :" , num4, "result :" , result);
+        // console.log("num1 :" , num1, "num2 :"  , num2, "num3 :" , num3, "num4 :" , num4, "result :" , result);
         //Hammad,Ayan//5             //9                // 1             //5                //20
         //Umar      //5             //9                 // 1            //5                 //57    
         //Hassan   //5             //69                 // 1           //75                 //150
@@ -44,5 +44,40 @@
         // agar main pehle ++ ya -- lagaoga to pehle value update krega baad mai return krega
         // agar main baad ++ ya -- lagaoga to pehle value return krega baad mai update krega
     </script>
+
+    <script>
+        let num1 = 5;
+        let num2 = 8;
+
+        let result = --num1 + num1-- + --num1 + ++num2 + num2-- + ++num1 + num2++;
+
+        console.log(num1 , num2, result);
+
+        // Abdul Rashid  3  8 39
+        // Abdul Rahim   3  9 39
+        // Ayan          4  3 42
+        // Shahwaiz      3  9 39
+        // Shahmeer      3  9 43
+        // Saqlain       3  9 38
+        // Ayan          3  9 39
+        //               3  9 39
+
+        // let num3 = num2;
+        // console.log(++num1);
+        // console.log(num1);
+        // let result = num1++ + ++num2 + ++num1 + --num2 + num2--;
+        //             // 5 + 9 + 7 + 8 + 8
+        // // num1=7
+        // // num2=7
+        // // result=37
+        // console.log(num1, num2, result);
+
+        // Shahmeer 7  6  37
+        // Taha     7  7  37
+        // Abdullah 7  7  36
+        // Adeel    7  7  37
+        // Ayan     7  7  35
+    </script>
+
 </body>
 </html>
