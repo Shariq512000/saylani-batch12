@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Operator</title>
+</head>
+<body>
+
+    <p>Passing Marks 50%</p>
+    <form onsubmit="return false">
+        <label for="percent">Write Your Percent</label>
+        <input type="number" id="percent">
+        <button onclick="checkPercent()">Check Fail or Pass</button>
+    </form>
+
+    <script>
+
+        function checkPercent(){
+            let userPercent = document.querySelector("#percent").value;
+            if(userPercent < 50){
+                alert("You are Failed")
+            }else{
+                alert("You are Pass");
+            }
+        }
+
+
+
+
+        // "String" , 123, true
+        //  String  ,number, Boolean
+        // let isEqual = true
+
+        // let num1 = 7;
+        // let num2 = "7";
+
+        // let quessNum = 5;
+
+        // let userInput = prompt("Guess the number between 1 to 10");
+
+        // if(quessNum === Number(userInput))
+        // {
+        //     alert("Correct Answer");
+        // }else if(userInput == 6){
+        //     alert("You are Too Close to guess");
+        // }else if(userInput == 4){
+        //     alert("You are Too Close to guess");
+        // }
+        // else{
+        //     alert("Wrong Answer")
+        // }
+
+        // console.log(num1 == num2);
+    </script>
+</body>
+</html>
