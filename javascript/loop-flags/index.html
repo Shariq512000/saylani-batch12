@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Flags</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // console.log(cities[cities.length - 1])
+        // alert(cities.length);
+        // if(cities[0] == userCity){
+        //     alert("City Matched");
+        // }else if(cities[1] == userCity){
+        //     alert("City Matched");
+        // }else if(cities[2] == userCity){
+        //     alert("City Matched");
+        // }else if(cities[3] == userCity){
+        //     alert("City Matched");
+        // }else{
+        //     alert("City Did not Matched");
+        // }
+
+
+        let userCity = "Hydrabad";
+        let cities = ["Karachi" , "Lahore", "Hydrabad" , "Peshawar" , "Quetta"];
+
+        let isMatched = false;
+
+        for(let i=0; i < cities.length; i++){
+            if(cities[i] == userCity){
+                isMatched = true;
+                break;
+            }
+            console.log(i , cities[i]);
+        }
+
+        console.log( isMatched );
+
+        if(isMatched){
+            console.log("City Matched");
+        }else{
+            console.log("City did not Matched");
+        }
+
+        
+    </script>
+</body>
+</html>
