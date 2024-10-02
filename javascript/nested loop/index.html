@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested Loop</title>
+</head>
+<body>
+    <script>
+        console.log("Loop Start")
+
+        let newArr = [
+            [ "batch1 class1" , "batch1 class2" , "batch1 class3" , "batch1 class4" ], 
+            [ "batch2 class1" , "batch2 class2" , "batch2 class3" ],
+            [ "batch3 class1" , "batch3 class2" , "batch3 class3" , "batch3 class4" ], 
+            [ "batch4 class1" , "batch4 class2" , "batch4 class3" , "batch4 class4" , "batch4 class5" ], 
+        ]
+
+        for(let i=0; i < newArr.length; i++){
+
+            for(let j=0; j < newArr[i].length; j++){
+
+                console.log(newArr[i][j])
+
+            }
+            
+            console.log("///////////-----------------------//////////////////////")
+        }
+
+        console.log("Loop End")
+    </script>
+</body>
+</html>
