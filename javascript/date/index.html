@@ -6,21 +6,67 @@
     <title>Date</title>
 </head>
 <body>
+
+    <!-- <form onsubmit="submit(); return false"> -->
+        <input type="date" name="" id="input1">
+        <br>
+        <button onclick="submit()">Submit</button>
+    <!-- </form> -->
     
     <script>
-        let weekArr = ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday"];
-        let monthArr = ["Jan" , "Feb" , "Mar" , "Apr" , "May" , "Jun" , "Jul" , "Aug" , "Sep" , "Oct" , "Nov" , "Dec"];
-        let currentDate = new Date();
-        let weekDay = currentDate.getDay();     // Day of Week 0-6 where 0 is Sunday
-        let month = currentDate.getMonth();     // Month 0-11 where 0 is January
-        let date = currentDate.getDate();       // Return Date 1-31
-        let year = currentDate.getFullYear();   // Return Year
-        let hour = currentDate.getHours();
-        let min = currentDate.getMinutes();
-        let second = currentDate.getSeconds();
-        let outDate = date + weekArr[weekDay] + (month + 1) + monthArr[month] + year + hour + ":" + min + ":" + second;
-        let outDate2 = `${date} ${weekArr[weekDay]} ${(month + 1)} ${monthArr[month]} ${year} ${hour}:${min}:${second}`;
-        console.log(outDate2);
+        // let weekArr = ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday"];
+        // let monthArr = ["Jan" , "Feb" , "Mar" , "Apr" , "May" , "Jun" , "Jul" , "Aug" , "Sep" , "Oct" , "Nov" , "Dec"];
+        // let currentDate = new Date();
+        // let weekDay = currentDate.getDay();     // Day of Week 0-6 where 0 is Sunday
+        // let month = currentDate.getMonth();     // Month 0-11 where 0 is January
+        // let date = currentDate.getDate();       // Return Date 1-31
+        // let year = currentDate.getFullYear();   // Return Year
+        // let hour = currentDate.getHours();
+        // let min = currentDate.getMinutes();
+        // let second = currentDate.getSeconds();
+        // let outDate = date + weekArr[weekDay] + (month + 1) + monthArr[month] + year + hour + ":" + min + ":" + second;
+        // let outDate2 = `${date} ${weekArr[weekDay]} ${(month + 1)} ${monthArr[month]} ${year} ${hour}:${min}:${second}`;
+        // console.log(outDate2);
+        // let newDate = new Date();
+        // let timeStamp = newDate.getTime();
+        // let secondTime = timeStamp / 1000;
+        // let minutes = secondTime / 60;
+        // let hours = minutes / 60;
+        // let days = hours / 24;
+        // let week = days / 7
+        //console.log(timeStamp,secondTime, minutes, hours, days, Math.floor(week));
+
+        // let newDate = new Date("May 20, 2025");
+
+        // let currentDate = new Date();
+
+        // let diffDate = newDate.getTime() - currentDate.getTime();
+
+        // let diffInDate = diffDate / (1000 * 60 * 60 * 24)
+
+        // console.log(Math.floor(diffInDate))
+
+        let currentDate = new Date("2003-01-05");
+
+        // currentDate.setFullYear(2026)
+        // currentDate.setMonth(0)
+        // currentDate.setDate(5);
+        // currentDate.setHours(17)
+        // currentDate.setMinutes(30)
+
+        console.log(currentDate.getFullYear())
+
+        // function submit(){
+        //     let input1 = Number(document.querySelector("#input1").value);
+        //     let input2 = Number(document.querySelector("#input2").value);
+
+        //     console.log(input1 + input2)
+        //     console.log(input1 - input2)
+        // }
+
+        // 20 May 2024
+        // 20 May 2025
+
     </script>
 </body>
 </html>
