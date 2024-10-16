@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+</head>
+<body>
+
+    <!-- <form onsubmit="return false;"> -->
+        <input type="number" id="input1">
+        <br>
+        <input type="number" id="input2">
+        <br>
+        <select id="operator" value="sum">
+            <option value="sum">Add</option>
+            <option value="sub">Minus</option>
+            <option value="mul">Multiply</option>
+            <option value="divide">Divide</option>
+        </select>
+        <br>
+        <button onclick="submit()">Submit</button>
+    <!-- </form> -->
+
+    <div class="result"></div>
+    
+    <script>
+
+        let dummyVal = "abc";
+
+
+        function submit(){
+            let input1 = Number(document.querySelector("#input1").value);
+            let input2 = Number(document.querySelector("#input2").value);
+            let operator = document.querySelector("#operator").value;
+            let resultContainer = document.querySelector(".result");
+
+            dummyVal = "123"
+
+            console.log("dummyValFunction" , dummyVal)
+            
+            let result;
+            // if(operator == "sum"){
+            //     result = sum(input1 , input2)
+            // }else if(operator == "sub"){
+            //     result = sub(input1 , input2)
+            // }else if(operator == "mul"){
+            //     result = mul(input1 , input2)
+            // }else if(operator == "divide"){
+            //     result = div(input1 , input2)
+            // }
+
+            result = (operator == "sum") ? sum(input1 , input2) : (operator == "sub") ? sub(input1 , input2) : (operator == "mul") ? mul(input1 , input2) : div(input1 , input2);
+
+            // let    = "";
+
+            // if(input1 < input2){
+            //     numVal = "input2 is greater"
+            // }else{
+            //     numVal = "input1 is greater"
+            // }
+
+            // numVal = (input1 < input2) ? "input2 is greater" : (input1 > input2) ? "input1 is greater" : "";
+
+            resultContainer.innerText = result;
+        }
+
+        function sum(y , z){
+            return y + z;
+        }
+
+        function sub(y , z){
+            return y - z;
+        }
+
+        function mul(y , z){
+            return y * z;
+        }
+
+        function div(y , z){
+            return y / z;
+        }
+
+        console.log("dummyVal" , dummyVal, resultContainer)
+    </script>
+</body>
+</html>
