@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="input1">
+    <br>
+    <input type="number" id="input2">
+
+    <button onclick="submit()">Submit</button>
+
+    <button onclick="setVal()">Click</button>
+
+    <script>
+        function submit(){
+            let input1 = Number(document.querySelector("#input1").value);
+            let input2 = Number(document.querySelector("#input2").value);
+            console.log(input1 + input2);
+        }
+        function setVal(){
+            document.querySelector("#input1").value = 10
+        }
+    </script>
+</body>
+</html>

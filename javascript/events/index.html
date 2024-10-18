@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chnImg{
+            transition: all 0.4s ease-in-out;
+        }
+        .chnDiv{
+            width: 200px; 
+            height: 200px; 
+            background-color: red; 
+            transition: all 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" onclick="alertUser()";>Click</a>
+    <button onclick="alertUser()">Click</button>
+    <br>
+    <br>
+
+    <label for="">
+        Name:<input type="text" onfocus="this.style.backgroundColor = 'yellow'" onblur="this.style.backgroundColor = 'white'">
+    </label>
+    
+    <!-- <div class="imgContainer" style="position: relative;">
+        <img src="apple.jpg" style="position: absolute; opacity: 1; top: 0; transition: all 2s ease-in-out;" width="500" alt="" onmouseover="this.style.opacity = 0" onmouseout="this.style.opacity = 1">
+        <img src="tree-.jpg" width="500" alt="">
+    </div> -->
+    <!-- <img src="apple.jpg" alt="" onclick="alertUser()"> -->
+    <!-- <img src="apple.jpg" alt="" id="chnImg" width="500" onMouseEnter="src='tree-.jpg'" onmouseleave="src='apple.jpg'"> -->
+
+    <!-- <div class="chnDiv" onmouseenter="this.style.backgroundColor = 'yellow'"  onmouseout="this.style.backgroundColor = 'red'"></div> -->
+
+    <script>
+        function alertUser(){
+            let user = "shariq";
+            let newArr = ["item1" , "item2" , "item3" , "item4"]
+            console.log("Start Alert")
+            alert(`Hello ${user} ${newArr[2]}`);
+            console.log("End Alert")
+        }
+    </script>
+</body>
+</html>
