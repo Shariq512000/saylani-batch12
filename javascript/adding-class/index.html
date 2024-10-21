@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+    <style>
+        .item{
+            width: 200px; height: 200px; background-color: red;
+        }
+        .hidden{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="mainBox" class="item" onclick="toggleHideShow()">
+
+    </div>
+
+    <script>
+        function toggleHideShow(){
+            let eleClass = document.getElementById("mainBox").className;
+            console.log("eleClass" , eleClass)
+            if(eleClass){
+                document.getElementById("mainBox").className = "";
+            }else{
+                document.getElementById("mainBox").className = "hidden";
+            }
+        }
+
+        // function addClass(){
+        //     // console.log("classList :" , )
+        //     document.getElementById("mainBox").classList.add("newClass2")
+        // }
+    </script>
+</body>
+</html>

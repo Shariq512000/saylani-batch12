@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p class="intro">
+        
+    </p>
+
+    <script>
+        let defaultHtml = `Lorem ipsum dolor sit amet consectetur adipisicing elit. <button onclick="showText()">See More</button>`
+        document.querySelector(".intro").innerHTML = defaultHtml
+        function showText(){
+            // console.log(document.querySelector(".intro").innerHTML);
+            document.querySelector(".intro").innerHTML = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam porro numquam, 
+            sit aut aperiam perferendis, amet deserunt eum sint dolore nostrum impedit, 
+            ipsa quia ducimus deleniti quaerat labore atque cupiditate! Quisquam aliquam 
+            voluptate cum quae optio facere, quidem iure ratione. Nesciunt totam officiis 
+            assumenda veritatis consequatur consectetur voluptatum laborum saepe maxime, 
+            ratione hic sed tenetur perferendis repellat quos a quo! Animi beatae non fugit 
+            totam blanditiis rerum voluptas ducimus earum fuga saepe ipsum, libero facilis 
+            vitae quaerat? Totam eius deleniti repudiandae aliquam blanditiis in 
+            illum reiciendis, ea provident? Sunt, laudantium? Minima ipsum debitis aliquid 
+            consectetur possimus doloremque dolorum recusandae, assumenda sed, reprehenderit
+             atque illo asperiores, repudiandae sequi dicta. Aliquam blanditiis quam minima 
+             excepturi sed voluptatem, ex est libero delectus quas! Exercitationem laborum 
+             necessitatibus veniam ad dicta! Iusto, fuga necessitatibus. Perferendis quidem 
+             ratione est blanditiis, ab dolore voluptates, quia error at quod, veritatis 
+             consectetur quae nemo et rerum. Doloremque, accusantium ad. Ipsum quidem dicta,
+              possimus totam non alias autem repellendus consectetur sunt aliquam maxime 
+              architecto assumenda aut, voluptatum quo illo. Error unde rerum ab nulla 
+              minima nihil necessitatibus totam et natus. Quo error tenetur aliquam 
+              laboriosam. Reprehenderit, eum ex.
+              <button onclick="lessText()" class="btn">Less More</button>
+            `
+        }
+
+        function lessText(){
+            document.querySelector(".intro").innerHTML = defaultHtml
+        }
+    </script>
+</body>
+</html>
