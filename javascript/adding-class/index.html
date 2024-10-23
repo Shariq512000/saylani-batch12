@@ -21,18 +21,21 @@
 
     <script>
         function toggleHideShow(){
-            let eleClass = document.getElementById("mainBox").className;
-            console.log("eleClass" , eleClass)
+            let eleClass = document.getElementById("mainBox").classList.contains("hidden");
             if(eleClass){
-                document.getElementById("mainBox").className = "";
+                document.getElementById("mainBox").classList.remove("hidden")
             }else{
-                document.getElementById("mainBox").className = "hidden";
+                document.getElementById("mainBox").classList.add("hidden")
             }
         }
 
-        // function addClass(){
-        //     // console.log("classList :" , )
-        //     document.getElementById("mainBox").classList.add("newClass2")
+        // function toggleHideShow(){
+        //     let eleClass = document.getElementById("mainBox").className;
+        //     if(eleClass){
+        //         document.getElementById("mainBox").name += "hidden";
+        //     }else{
+        //         document.getElementById("mainBox").className = "";
+        //     }
         // }
     </script>
 </body>
