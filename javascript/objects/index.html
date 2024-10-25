@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        // let plan1Name = "Basic";
+        // let plan1Price = 3.99;
+        // let plan1Space = 100;
+        // let plan1Data = 1000;
+        // let plan1Pages = 10;
+        let plan1 = {
+            name: "Basic",
+            price: 3.99,
+            space: 100,
+            data: 1000,
+            page: 10,
+            month: ["January" , "Febuary", "March"],
+            details: {duration: "1 month", discount: "10%"}
+        }
+
+        let plans = [
+            {
+                name: "Basic",
+                price: 3.99,
+                space: 100,
+                data: 1000,
+                page: 10,
+                month: ["January" , "Febuary", "March"],
+                details: {duration: "1 month", discount: "10%"}
+            },
+            {
+                name: "Advance",
+                price: 3.99,
+                space: 100,
+                data: 1000,
+                page: 10,
+                month: ["January" , "Febuary", "March"],
+                details: {duration: "1 month", discount: "10%"}
+            },
+            {
+                name: "Ultimate",
+                price: 3.99,
+                space: 100,
+                data: 1000,
+                page: 10,
+                month: ["January" , "Febuary", "March"],
+                details: {duration: "1 month", discount: "10%"}
+            },
+        ]
+
+        console.log(plans[2])
+
+        alert(`${plans[2]}`)
+
+        // plan1.name = "Advance";
+
+        // plan1.month = "Octuber",
+
+        // alert(`The Plan ${plan1.name} Provides ${plan1.space} Storage in just $${plan1.price} ${plan1.month[1]} ${plan1.details.discount}`)
+    </script>
+</body>
+</html>

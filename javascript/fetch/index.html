@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <div class="result"></div>
+    <img src="" alt="" id="weatherIcon">
+    
+    <script>
+        let city = "London";
+        // fetch(`https://api.weatherapi.com/v1/current.json?key=d347dfb1a00b4f86add45435242510&q=${city}`)
+        //     .then(function(response){
+        //         // let newRes = response.json()
+        //         console.log(response);
+        //     }).catch(function(err){
+        //         console.log(err)
+        //     })
+        axios.get(`https://api.weatherapi.com/v1/current.json?key=d347dfb1a00b4f86add45435242510&q=${city}`)
+        .then(function(response){
+            console.log(response.data)
+            document.querySelector("#weatherIcon").src = `https:${response.data.current.condition.icon}`;
+            // str.replace("//" , "")
+        }).catch(function(err){
+            console.log(err);
+        })
+
+        console.log(newStr);
+    </script>
+</body>
+</html>
