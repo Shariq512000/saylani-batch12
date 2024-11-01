@@ -7,18 +7,20 @@
 </head>
 <body>
     
-    <label for="userName">
-        Name: <input type="text" id="userName">
-    </label><br>
-
-    <label for="userEmail">
-        Email: <input type="email" id="userEmail">
-    </label><br>
-
-    <label for="userPassword">
-        Password: <input type="text" id="userPassword">
-    </label><br>
-    <button onclick="setUser()">Submit</button>
+    <form id="signUpForm">
+        <label for="userName">
+            Name: <input type="text" id="userName" required>
+        </label><br>
+    
+        <label for="userEmail">
+            Email: <input type="email" id="userEmail" required>
+        </label><br>
+    
+        <label for="userPassword">
+            Password: <input type="text" id="userPassword" required>
+        </label><br>
+        <button>Submit</button>
+    </form>
 
     <br>
     <a href="login.html">Goto Login Page</a>

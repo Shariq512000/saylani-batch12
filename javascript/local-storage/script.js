@@ -7,6 +7,15 @@ function setUser(){
 
     let users = JSON.parse(localStorage.getItem("users"))
 
+    if(users){
+        for(let i=0; i<users.length; i++){
+            if(users[i].email == userEmail){
+                alert("Email Already Exist");
+                return;
+            }
+        }
+    }
+
     console.log(users);
 
     if(users){
@@ -15,20 +24,15 @@ function setUser(){
     }else{
         localStorage.setItem("users" , JSON.stringify([userData]))
     }
-
-    // let users = [
-    //     {name: "user1", rollNumber: "1"},
-    //     {name: "user2", rollNumber: "2"},
-    //     {name: "user3", rollNumber: "3"},
-    //     {name: "user4", rollNumber: "4"},
-    //     {name: "user5", rollNumber: "5"},
-    //     {name: "user6", rollNumber: "6"},
-    //     {name: "user7", rollNumber: "7"},
-    // ]
-
-    // localStorage.setItem("users" , JSON.stringify(userData))
-    // localStorage.setItem("allUsers" , JSON.stringify(users))
+    document.getElementById("userName").value = "";
+    document.getElementById("userEmail").value = "";
+    document.getElementById("userPassword").value = "";
 }
+
+document.getElementById("signUpForm").addEventListener("submit", function(event){
+    event.preventDefault();
+    setUser();
+});
 
 function checkUser(){
     let userEmail = document.getElementById("inputEmail").value;
@@ -38,9 +42,9 @@ function checkUser(){
     let notMached = true;
 
     for(let i=0; i < allUsers.length; i++){
-        if(allUsers[0].email == userEmail){
+        if(allUsers[i].email == userEmail){
             notMached = false;
-            if(userPass == allUsers[0].password){
+            if(userPass == allUsers[i].password){
                 alert("Success")
                 window.location.href = "./dashboard.html"
             }else{
