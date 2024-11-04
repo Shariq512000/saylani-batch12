@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Properties</title>
+</head>
+<body>
+    
+    <script>
+        // let newObj = {name: "Shariq", rollNumber: 123}
+        // newObj.batch = 12;
+        // newObj.class = ["I-P Batch 1", "W-M Batch 12"]
+        // // delete newObj.rollNumber
+        // console.log(newFun)
+
+
+        // var newVar = "Data"
+        // function newFun(){
+        //     return "Abc"
+        // }
+        
+        // var newFun = () => {
+        //     return "Abc"
+        // }
+        // console.log(newFun())
+        // let isPresent = "rollNumber" in newObj
+        // console.log(newObj, isPresent)
+
+
+        var plan1 = {
+            name: "Basic",
+            price: 3.99,
+            space: 100,
+            transfer: 1000,
+            pages: 10,
+            discountMonths: [6, 7, 10],
+            disCount: 0.80
+        };
+
+        var plan2 = {
+            name: "Advance",
+            price: 5.99,
+            space: 100,
+            transfer: 1000,
+            pages: 10,
+            discountMonths: [6, 7, 10],
+            disCount: 0.75
+        };     
+
+        var plan3 = {
+            name: "Ultimate",
+            price: 8.99,
+            space: 100,
+            transfer: 1000,
+            pages: 10,
+            discountMonths: [6, 7, 10],
+            disCount: 0.70
+        };
+
+        function calculatePrice(){
+            let packagePrice = plan1.price;
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            for(let i=0; i < plan1.discountMonths.length; i++){
+                if(plan1.discountMonths[i] == currentMonth){
+                    packagePrice = packagePrice * 0.8;
+                }
+            }
+            return packagePrice * 12
+        }
+
+        // console.log(calculatePrice())
+        alert(calculatePrice())
+
+    </script>
+</body>
+</html>
