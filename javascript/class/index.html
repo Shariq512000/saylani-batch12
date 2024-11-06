@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    
+
+    <script>
+
+        class TrainTicket{
+            name = "";
+            cnic = "";
+            time = "";
+            trainName = "";
+            submit = () =>   {
+                alert(`Your Ticket is Submitted, for train ${this.trainName}`)
+            }
+        }
+
+        let user1Ticket = new TrainTicket();
+        let user2Ticket = new TrainTicket();
+
+        user1Ticket.name = "Shariq";
+        user1Ticket.cnic = "42401578467863";
+        user1Ticket.time = "7 Nov 2024";
+        user1Ticket.trainName = "Korakaram Express"
+
+        user2Ticket.name = "Areeb";
+        user2Ticket.cnic = "42401578467863";
+        user2Ticket.time = "7 Nov 2024";
+        user2Ticket.trainName = "Syed Express"
+
+        user1Ticket.submit()
+        user2Ticket.submit()
+
+        // console.log(user1Ticket.submit());
+
+        // user2Ticket.name = "Areeb";
+
+
+
+        // let plan1 = new Plan();
+        // let plan2 = new Plan();
+
+        
+        // plan1.name = "Basic";
+        // plan2.newFunction();
+
+        // console.log(plan1);
+        // console.log(plan2);
+
+        // var plan1 = {
+        //     name: "Basic",
+        //     price: 3.99,
+        //     disCount: 0.80
+        // };
+    </script>
+</body>
+</html>
