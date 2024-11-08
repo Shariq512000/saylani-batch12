@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor</title>
+</head>
+<body>
+
+    <input type="text" placeholder="Name" id="userName">
+    <br>
+    <input type="text" placeholder="Address" id="userAddress">
+    <br>
+    <input type="text" placeholder="Age" id="userAge">
+    <br>
+    <button onclick="addUser()">Submit</button>
+    <br>
+    
+    
+    <script>
+        class Human{
+            constructor(name , address, age){
+                this.name = name;
+                this.address = address;
+                this.age = age
+            }
+
+            run = (km=5) => {
+                console.log(`${this.name} is running ${km} km`)
+            }
+        }
+
+        let user = [];
+
+        const addUser = () => {
+            console.log("Run Function")
+            let userName = document.querySelector("#userName").value;
+            let userAddress = document.querySelector("#userAddress").value;
+            let userAge = document.querySelector("#userAge").value;
+            let newUser = new Human(userName , userAddress , userAge)
+            user.push(newUser);
+            document.querySelector("body").innerHTML += '<button onclick="run1()">Run</button>';
+        }
+
+        const run1 = () => {
+            console.log(user)
+        }
+
+        
+
+        // let user1 = new Human("Shariq" , "Karachi", "21");
+        // let user2 = new Human("Fahad" , "Karachi", "21");
+
+        // console.log(user1.name)
+        // console.log(user2.name);
+
+        // user2.run(6);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+</head>
+<body>
+    
+
+    <script>
+        class Human{
+            constructor(name , address, age){
+                this.name = name;
+                this.address = address;
+                this.age = age
+            }
+
+            run = (km=5) => {
+                console.log(`${this.name} is Running ${km} km`)
+            }
+        }
+
+        
+        class Student {
+            
+            isFeesPay = (condition) => {
+                if(condition == "yes"){
+                    console.log(`${this.name} payed Fess`)
+                }else{
+                    console.log(`${this.name} not payed Fess`)
+                }
+            }
+        }
+
+        class NewStudent extends Student{
+            isStudentJoin = (condition) => {
+                if(condition == "yes"){
+                    console.log(`${this.name} Joined`)
+                }else{
+                    console.log(`${this.name} not Joined`)
+                }
+            }
+        }
+
+        let student1 = new Student("Fahad" , "Karachi" , "21");
+
+        let student2 = new NewStudent("Shariq" , "Karachi", "21")
+
+        student1.isFeesPay("yes");
+        student2.isStudentJoin("yes");
+    </script>
+</body>
+</html>
