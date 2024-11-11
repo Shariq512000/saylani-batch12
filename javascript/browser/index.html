@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser</title>
+</head>
+<body>
+    <button onclick="changeHref()">Change Href</button>
+    <a href="newPage.html">Go to New Page</a>
+    <h1 id="topSec">
+        Top Section
+    </h1>
+    <button id="forwardBtn">Go Forward</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 id="bottomSec">Bottom Section</h1>
+    <a href="#topSec">Go to Top</a>
+    <script>
+        console.log(document.referrer)
+        const changeHref = () => {
+            // console.log(window.location.pathname)
+            location.pathname = "newPage.html";
+            // window.location.hash = "#bottomSec"
+            // window.location.reload()
+            window.location.replace("http://" + window.location.hostname + ":5500/" + "newPage.html")
+        }
+        document.getElementById("forwardBtn").addEventListener("click" , function(){
+            history.forward();
+        })
+        if(window.location.pathname == "dashboard.html" && localStorage.getItem("isLoged") == false){
+            window.location.pathname = "login.html"
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+</head>
+<body>
+    
+    
+
+    <script>
+        class Employee{
+            constructor(name, department){
+                this.name = name;
+                this.department = department;
+                console.log("Old Constructor")
+            }
+            requestLeave(leave){
+                console.log(`${this.name} Requested for ${leave} leaves`)
+            }
+        }
+
+        class Programmer extends Employee{
+            constructor(name, department){
+                super(name , department);
+                console.log("New Constructor")
+            }
+            requestLeave(leave){
+                super.requestLeave(leave + 1);
+                console.log("One Leave Extra");
+            }
+        }
+
+        let dev1 = new Programmer("Shariq" , "Software");
+
+        let newEmp = new Employee("New User" , "IT")
+
+
+        // console.log(dev1)
+        dev1.requestLeave(5)
+        newEmp.requestLeave(5)
+
+    </script>
+</body>
+</html>
