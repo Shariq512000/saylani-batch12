@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Control</title>
+</head>
+<body>
+    
+    <button onclick="openWindow()">Open New Tab</button>
+
+    <div class="result"></div>
+
+    <script>
+        const openWindow = () => {
+            let newTab = window.open();
+            let htmlContent = "<h1>Hello World</h1><img src='tree.jpg' width='500' height='400' />"
+            newTab.document.write(htmlContent)
+
+            setTimeout(() => {
+                newTab.close()
+            } , 2000)
+
+
+
+
+
+
+
+            // setTimeout(() => {
+            //     console.log("SetTimeout1 Console") // 4
+            // } , 2000)
+
+            // setTimeout(() => {
+            //     // newTab.close();
+            //     console.log("SetTimeout2 Console") /// 2
+            // })
+
+            // setTimeout(() => {
+            //     // newTab.close();
+            //     console.log("SetTimeout3 Console") // 3
+            // } , 1000)
+
+            // console.log("End Console") /// 1
+
+
+            // newTab.location.assign("https://instagram.com")
+        }
+        // setInterval(() => {
+        //     let newTime = new Date();
+        //     document.querySelector(".result").innerText = newTime.getSeconds()
+        //     // console.log(newTime.getSeconds())
+        // } , 2000)
+    </script>
+</body>
+</html>

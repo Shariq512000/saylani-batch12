@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+    <form id="submitForm">
+        <label for="">
+            Name: <input type="text" id="userName" required>
+                <p style="">This field is Required</p>
+        </label>
+        <br>
+        <label for="">
+            Roll Number: <input type="text" id="rollNumber" required>
+        </label>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // const submit = (e) => {
+        //     e.preventDefault()
+        //     console.log("SUBMIT FUNCTION")
+        // }
+        document.getElementById("submitForm").addEventListener("submit" , (event) => {
+            event.preventDefault()
+            let userName = document.querySelector("#userName")
+            // console.log("SUBMIT FUNCTION")
+            if(!userName.value){
+                userName.style.backgroundColor = "red"
+                alert("Please Enter Name")
+            }
+        })
+    </script>
+</body>
+</html>
