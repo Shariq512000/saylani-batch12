@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>DOM</title>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore, cupiditate. Repellat amet vitae consectetur.
+        Voluptatem dolor facilis, et eum laboriosam doloribus mollitia expedita minus dolorum ad dignissimos modi
+        aspernatur vero!
+    </p>
+    <div id="extraDiv">
+        <p> <span> </span> </p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ipsum temporibus repudiandae nostrum repellat
+            beatae in inventore modi et ipsam, iusto itaque aperiam laboriosam impedit eveniet perspiciatis officia,
+            quae tempora?
+        </p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ipsum temporibus repudiandae nostrum repellat
+            beatae in inventore modi et ipsam, iusto itaque aperiam laboriosam impedit eveniet perspiciatis officia,
+            quae tempora?
+        </p>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt odio laborum harum non nesciunt, blanditiis,
+        fugit excepturi neque voluptatum natus sed ad molestias ullam eveniet rerum! Quam, <!--<span> </span> -->
+        repudiandae? Corporis, nam?
+    </p>
+    <script>
+        let extraDiv = document.getElementById("extraDiv");
+        console.log(extraDiv.parentNode.parentNode.parentNode)
+        // let para = extraDiv.getElementsByTagName("p");
+        // para[1].innerText = " "
+        // console.log(para)
+        // let doc = document.firstChild.childNodes[1].childNodes[2].childNodes[0].nodeType;
+        // console.log(doc)
+
+
+
+        // let str = "  ";
+        // console.log(str.length)
+
+
+        // let dom = [
+        //     {domDocument: [
+        //         {html: [
+        //             {head: []},
+        //             {body: []}
+        //         ]}
+        //     ]}
+        // ]
+        // dom[0].domDocument[0].html[1]
+    </script>
+</body>
+
+</html>
