@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="container">
+        <p>PARA1</p>
+        <p>PARA3</p>
+    </div>
+
+    <script>
+
+        let parentDiv = document.getElementById("container");
+
+        let lastPara = parentDiv.childNodes[3]
+        
+        let newText = document.createTextNode("PARA2");
+
+        let newPara = document.createElement("p");
+
+        newPara.appendChild(newText);
+
+        parentDiv.insertBefore(newPara , lastPara)
+        parentDiv.removeChild(lastPara)
+        // parentDiv.appendChild(newPara)
+
+
+        // let textNode = document.createTextNode("Hello DOM")
+
+        // let paraElement = document.createElement("p");
+        // paraElement.setAttribute("class" , "newPara");
+        
+        // paraElement.appendChild(textNode)
+
+        // let divElement = document.createElement("div");
+        // divElement.setAttribute("class" , "newClass");
+        // divElement.appendChild(paraElement)
+        // let body = document.querySelector("body");
+
+        // body.appendChild(divElement);
+    </script>
+</body>
+</html>

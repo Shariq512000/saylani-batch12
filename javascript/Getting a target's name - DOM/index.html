@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="content1" style="">
+        <p id="2">Some Text</p>
+        <a href="#">Some Link</a>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <p>Some Text</p>
+
+    <script>
+        let parentDiv = document.getElementById("content1");
+        let para = parentDiv.getElementsByTagName("p")
+        let lists = parentDiv.getElementsByTagName("li")
+        let ancher = parentDiv.getElementsByTagName("a");
+        parentDiv.setAttribute("class" , "newClass class2")
+        // let isClassAvail = parentDiv.getAttribute("class")
+        console.log(parentDiv.attributes[2].nodeValue)
+
+        // let newArr = ["Item1" , "Item2" , "Item3", "Item4"];
+        // let newObj = {1: "newItem", 2: "newItem2"}
+        // console.log(newObj)
+        // console.log(para[0].nodeValue);
+    </script>
+</body>
+</html>
