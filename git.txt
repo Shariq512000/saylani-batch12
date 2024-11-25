@@ -1,0 +1,18 @@
+git init 			------> initializing
+git add 			------> untrack/modified to staged
+git commit -m "msg"		------> staged to commiting
+git status 			------> repository current status
+git diff			------> difference between untrack/modified to staged/last commit
+git diff --staged		------> difference between untrack/modified to staged/last commit
+git log				------> tracking/history of repo
+git branch <branch name>	------> create branch
+git checkout <branch name>	------> switching branch
+git branch -d <branch name>	------> remove branch
+git merge <branch name> 	------> merging branch
+git restore <file name>		------> restore previous code
+git restore --staged <file name>------> restore from staged to tracked/modified
+
+
+///// Configuration of user //////////
+git config --global user.name "w3schools-test"
+git config --global user.email "test@w3schools.com"
