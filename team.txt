@@ -1,0 +1,26 @@
+//// Main Person ////
+create repo
+initializing code 
+push on github
+add collabrator
+
+
+//// Other Person ////
+
+Clone Repo 
+add branch (Important)
+update code
+push on github git push origin "branch name"
+asked main person to merge
+
+
+//// Main Person ////
+
+fetch repo
+merge branch
+push on github
+
+//// Other Person ////
+
+pull git repo
+continue...
