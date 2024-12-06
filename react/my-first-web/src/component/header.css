@@ -1,0 +1,11 @@
+nav ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.leftBar{
+    width: 300px;
+    height: 90vh;
+}

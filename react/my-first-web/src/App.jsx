@@ -1,16 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import NewComponent from './component/NewComponent'
+import Header from './component/Header';
+import LeftBar from './component/LeftBar';
+import Post from './component/Post';
+import RightBar from './component/RightBar';
 
 function App() {
   return (
     <div className="App">
-      <NewComponent firstName="John" lastName="Dev1"  />
-      <NewComponent firstName="Dev" lastName="Dev2" />
-      <NewComponent firstName="Shariq3" lastName="Dev3" />
-      <NewComponent firstName="Shariq4" lastName="Dev4" />
-      <NewComponent firstName="Shariq5" lastName="Dev5" />
-      <NewComponent firstName="Shariq6" lastName="Dev6" />
+      <Header />
+      <div className="" style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+        <LeftBar />
+        <Post />
+        <RightBar />
+      </div>
     </div>
   );
 }

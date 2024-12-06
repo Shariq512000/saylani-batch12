@@ -1,7 +1,10 @@
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const NewComponent = (props) => {
     return(
-        <h1>Hello World {`${props.firstName} ${props.lastName}`}</h1>
+        <div>
+            <h1>Hello World {`${props.firstName} ${props.lastName}`}</h1>
+            <FontAwesomeIcon icon="fa-brands fa-facebook" />
+        </div>
     )
 }
 
