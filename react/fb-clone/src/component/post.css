@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.postDetailSec .profilePicture img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.postDetailSec h6{
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.postDetailSec p{
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+.postDetailSec{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.postContent p{
+    font-size: 15px;
+}
+
+.postContent img{
+    width: 100%;
+    max-height: 400px;
+}
