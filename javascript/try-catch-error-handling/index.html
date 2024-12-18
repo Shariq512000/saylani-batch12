@@ -12,38 +12,20 @@
 
 
     <script>
-        // console.log("Hello World Console 1")
-        // console.log("Hello World Console 2")
-        // setTimeout(() => {
-        //     try{
-        //         console.log(userName);
-        //     }catch(error){
-        //         console.log("Console in Catch")
-        //     }
-        // },0)
-        // console.log("Hello World Console 3")
-        // console.log("Hello World Console 4")
-        // console.log("Hello World Console 5")
+        console.log("Hello World Console 1")
+        console.log("Hello World Console 2")
 
-        const formSubmit = () => {
-            try {
-                let newText = document.getElementById("userPassword").value;
-                if(newText.length < 8){
-                    throw("Password must be minimum 8 characters")
-                    // return;
-                }
-                if(newText.length > 12){
-                    throw("Password must be maximum 12 characters")
-                    // return;
-                }
-                console.log("Submitted")
-            } catch (e) {
-                // console.log("error :" , error)
-                alert(e);
-            }
+        try{
+            console.log(userName)
+        }catch(err){
+            console.log(err)
         }
 
-        document.querySelector("#btn").onmouseover = formSubmit;
+        console.log("Hello World Console 3")
+        console.log("Hello World Console 4")
+        console.log("Hello World Console 5")
+
+        
     </script>
 </body>
 </html>
