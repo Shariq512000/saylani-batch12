@@ -1,26 +1,12 @@
-### Create React App
+## install Bootstrap
 
-npx create-react-app app_name
-
-### run react app
-
-npm start
+npm install react-bootstrap bootstrap
 
 
-### Create Build 
-
-npm run build
 
 
-### To Install Netlify
 
-npm install netlify-cli -g
 
-### To Login Netlify 
+## import bootstrap css on main file
 
-netlify login
-
-### To Deploy On Netlify
-
-netlify deploy --prod
-
+import 'bootstrap/dist/css/bootstrap.min.css';
