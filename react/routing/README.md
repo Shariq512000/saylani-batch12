@@ -1,26 +1,15 @@
-### Create React App
+### Install Routing 
 
-npx create-react-app app_name
+npm i react-router
 
-### run react app
+### Wrap App Component in index.js
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 
-npm start
-
-
-### Create Build 
-
-npm run build
-
-
-### To Install Netlify
-
-npm install netlify-cli -g
-
-### To Login Netlify 
-
-netlify login
-
-### To Deploy On Netlify
-
-netlify deploy --prod
-
+### use Routes and Route
+    <Routes>
+        <Route path="/login" element={<Login />}>
+    </Routes>
+### Change Url 
+    <Link to="/login"> Login Page </Link>
