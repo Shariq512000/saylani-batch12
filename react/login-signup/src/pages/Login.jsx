@@ -1,11 +1,14 @@
 import { Alert, Button, Snackbar, TextField } from '@mui/material'
 import axios from 'axios';
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import * as yup from "yup";
 import { useNavigate } from 'react-router';
+import { GlobalContext } from '../context/Context';
 
 const Login = () => {
+
+    let {state , dispatch} = useContext(GlobalContext)
 
     const [alertOpen , setAlertOpen] = useState(false);
     const [errorMessage , setErrorMessage] = useState("");
@@ -23,14 +26,15 @@ const Login = () => {
 
     const loginFormik = useFormik({
         initialValues: {
-            userName:'',
-            password: ''
+            userName:'emilys',
+            password: 'emilyspass'
         },
-        validationSchema: loginValidation,
+        // validationSchema: loginValidation,
         onSubmit: (values) => {
             axios.post("https://dummyjson.com/auth/login", {username: values.userName, password: values.password})
             .then((response) => {
-                console.log("Res : " , response);
+                console.log("Res : " , response.data);
+                dispatch({type: "USER_LOGIN", payload: response.data})
                 navigate("/home");
             })
             .catch((error) => {

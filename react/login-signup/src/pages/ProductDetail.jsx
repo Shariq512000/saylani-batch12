@@ -5,6 +5,7 @@ import Rating from '@mui/material/Rating';
 
 const ProductDetail = () => {
     const {id} = useParams();
+    console.log("useParams()" , useParams());
 
     const [productDetail, setProductDetail] = useState({})
 

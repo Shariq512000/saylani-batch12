@@ -25,10 +25,10 @@ const Home = () => {
                         <Card key={index} style={{ width: '18rem' }}>
                             <Card.Img variant="top" src={ele?.images[0]} />
                             <Card.Body>
-                            <Card.Title>{ele?.id}: {ele?.title}</Card.Title>
-                            <Card.Text>
-                                {ele?.description}
-                            </Card.Text>
+                                <Card.Title>{ele?.id}: {ele?.title}</Card.Title>
+                                <Card.Text>
+                                    {ele?.description}
+                                </Card.Text>
                             </Card.Body>
                         </Card>
                     </Link>
