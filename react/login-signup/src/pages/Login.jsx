@@ -34,6 +34,7 @@ const Login = () => {
             axios.post("https://dummyjson.com/auth/login", {username: values.userName, password: values.password})
             .then((response) => {
                 console.log("Res : " , response.data);
+                localStorage.setItem("userToken" , response?.data?.accessToken)
                 dispatch({type: "USER_LOGIN", payload: response.data})
                 navigate("/home");
             })

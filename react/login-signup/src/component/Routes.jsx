@@ -6,6 +6,7 @@ import Profile from '../pages/Profile'
 import ProductDetail from '../pages/ProductDetail'
 import { Navigate } from 'react-router'
 import { GlobalContext } from '../context/Context'
+import { CircularProgress } from '@mui/material'
 
 const CustomRoutes = () => {
     let {state , dispatch} = useContext(GlobalContext);
@@ -19,10 +20,15 @@ const CustomRoutes = () => {
                 <Route path="*" element={<Navigate to={"/home"} />} />
             </Routes>
             :
+            (state.isLogin == false)?
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<Navigate to={"/login"} />} />
             </Routes>
+            :
+            <div className="d-flex align-items-center justify-content-center" style={{height: "100vh"}}>
+                <CircularProgress size={250} />
+            </div>
         }
       
     </div>
