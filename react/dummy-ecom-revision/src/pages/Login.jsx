@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from "yup";
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { GlobalContext } from '../context/Context';
 
 const Login = () => {
 
+    let {state, dispatch} = useContext(GlobalContext);
+    console.log(state)
     const [isShow , setIsShow] = useState(false);
 
     const navigate = useNavigate();
@@ -28,6 +31,8 @@ const Login = () => {
             axios.post("https://dummyjson.com/auth/login", {username: values.userName, password: values.password})
             .then((res) => {
                 console.log(res.data);
+                localStorage.setItem("token" , res.data?.accessToken)
+                dispatch({type: "USER_LOGIN", user: res.data})
                 navigate("/home")
             })
             .catch((err) => {

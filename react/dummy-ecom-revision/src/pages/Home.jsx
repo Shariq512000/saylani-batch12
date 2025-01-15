@@ -1,8 +1,12 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router';
+import { GlobalContext } from '../context/Context';
 
 const Home = () => {
 
+    let {state, dispatch} = useContext(GlobalContext);
+    console.log(state)
     const [products, setProducts] = useState([]);
 
     console.log(products)
@@ -19,9 +23,9 @@ const Home = () => {
   return (
     <div className="" style={{display: "flex", rowGap: 12, flexDirection:"column", alignItems: "center"}}>
         {products?.map((eachProduct) => (
-            <div className="" key={eachProduct.id} style={{padding: 20, borderRadius: 8, border: "1px solid #EEE", width: 250}}>
+            <Link to={`/product-detail/${eachProduct.id}`} className="" key={eachProduct.id} style={{padding: 20, borderRadius: 8, border: "1px solid #EEE", width: 250}}>
                 {eachProduct.title}
-            </div>
+            </Link>
         ))}
     </div>
   )
