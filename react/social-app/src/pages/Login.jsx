@@ -1,38 +1,32 @@
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 
-const Signup = () => {
+const Login = () => {
 
-    const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const auth = getAuth();
 
-    const createUser = (e) => {
+    const loginUser = (e) => {
         e.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed up 
+            // Signed in 
             const user = userCredential.user;
             console.log("Res" , user)
             // ...
         })
         .catch((error) => {
-            console.log("err" , error)
+            console.log("Err" , error)
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
         });
     }
 
   return (
     <div>
-        <form onSubmit={createUser}>
-            <label htmlFor="email">
-                Name <input type="text" id='email' value={email} onChange={(e) => {setEmail(e?.target.value)}} />
-            </label>
-            <br />
+        <form onSubmit={loginUser}>
             <label htmlFor="email">
                 Email <input type="text" id='email' value={email} onChange={(e) => {setEmail(e?.target.value)}} />
             </label>
@@ -41,10 +35,10 @@ const Signup = () => {
                 Password<input type="text" value={password} onChange={(e) => {setPassword(e?.target.value)}} />
             </label>
             <br />
-            <button>Signup</button>
+            <button>Login</button>
         </form>
     </div>
   )
 }
 
-export default Signup
+export default Login
