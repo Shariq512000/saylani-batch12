@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 
 const Signup = () => {
 
@@ -15,6 +15,28 @@ const Signup = () => {
         .then((userCredential) => {
             // Signed up 
             const user = userCredential.user;
+            updateProfile(auth.currentUser, {
+                displayName: userName, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs10cupyp3Wf-pZvdPjGQuKne14ngVZbYdDQ&s"
+            }).then(() => {
+
+                sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    // Email verification sent!
+                    console.log("Email verification sent!")
+                    // ...
+                })
+                .catch(() => {
+                    console.log("Verification not sent")
+                })
+
+                console.log("Profile Updated")
+                // Profile updated!
+                // ...
+            }).catch((error) => {
+                console.log("Update Profile Err" , error)
+                // An error occurred
+                // ...
+            });
             console.log("Res" , user)
             // ...
         })
@@ -29,8 +51,12 @@ const Signup = () => {
   return (
     <div>
         <form onSubmit={createUser}>
-            <label htmlFor="email">
-                Name <input type="text" id='email' value={email} onChange={(e) => {setEmail(e?.target.value)}} />
+            <label htmlFor="userName">
+                Name:<input 
+                        type="text" id='userName' 
+                        value={userName} 
+                        onChange={(e) => {setUserName(e?.target.value)}}
+                     />
             </label>
             <br />
             <label htmlFor="email">

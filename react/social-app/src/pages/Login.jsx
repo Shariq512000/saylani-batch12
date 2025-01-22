@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword  } from "firebase/auth";
 
 const Login = () => {
 
@@ -23,6 +23,21 @@ const Login = () => {
             const errorMessage = error.message;
         });
     }
+    
+    const forgetPassword = () => {
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            // Password reset email sent!
+            // ..
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+    }
+
+    const [userEmail , setUserEmail] = useState()
 
   return (
     <div>
@@ -36,6 +51,12 @@ const Login = () => {
             </label>
             <br />
             <button>Login</button>
+        </form>
+        <form>
+            <label htmlFor="">
+                Your Email: <input type="email" />
+            </label>
+            <button type='submit'>Forget Password</button>
         </form>
     </div>
   )
