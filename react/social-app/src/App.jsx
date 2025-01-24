@@ -8,6 +8,7 @@ import CustomRoutes from './component/CustomRoutes';
 import { useContext, useEffect } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { GlobalContext } from './context/Context';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 

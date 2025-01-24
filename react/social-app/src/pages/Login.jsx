@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword  } from "firebase/auth";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const Login = () => {
 
@@ -25,19 +27,29 @@ const Login = () => {
     }
     
     const forgetPassword = () => {
-        sendPasswordResetEmail(auth, email)
+        sendPasswordResetEmail(auth, userEmail)
         .then(() => {
             // Password reset email sent!
+            console.log("Reset Email Sent!");
+            handleClose();
             // ..
         })
         .catch((error) => {
+            console.log("Err" , error)
             const errorCode = error.code;
             const errorMessage = error.message;
             // ..
         });
     }
 
-    const [userEmail , setUserEmail] = useState()
+    const [userEmail , setUserEmail] = useState("");
+
+    const [show , setShow] = useState(false);
+
+    const handleClose = () => {
+        setUserEmail("")
+        setShow(false);
+    }
 
   return (
     <div>
@@ -50,14 +62,36 @@ const Login = () => {
                 Password<input type="text" value={password} onChange={(e) => {setPassword(e?.target.value)}} />
             </label>
             <br />
+            <div className="d-flex">
+                <p className='text-underline' onClick={() => {setShow(true)}} style={{textDecoration: "underline", cursor: "pointer"}}>Forgot Password</p>
+            </div>
             <button>Login</button>
         </form>
-        <form>
+        {/* <form>
             <label htmlFor="">
-                Your Email: <input type="email" />
+                Your Email: <input type="email" value={userEmail} onChange={(e) => {setUserEmail(e.target.value)}} />
             </label>
             <button type='submit'>Forget Password</button>
-        </form>
+        </form> */}
+
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Forgot Password</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <label htmlFor="">
+                    Enter Email : <input type="email" value={userEmail} onChange={(e) => {setUserEmail(e.target.value)}} />
+                </label>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={forgetPassword}>
+                    Send Email
+                </Button>
+            </Modal.Footer>
+        </Modal>
     </div>
   )
 }
