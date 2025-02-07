@@ -4,6 +4,7 @@ import Signup from '../pages/Signup'
 import Login from '../pages/Login'
 import Home from '../pages/Home'
 import { GlobalContext } from '../context/Context'
+import Profile from '../pages/Profile'
 
 const CustomRoutes = () => {
 
@@ -14,6 +15,7 @@ const CustomRoutes = () => {
         {(state?.isLogin == true)?
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/profile' element={<Profile />} />
                 <Route path='*' element={<Navigate to={"/"} />} />
             </Routes>
             :
