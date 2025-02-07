@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../context/Context'
 import { getAuth, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, where } from "firebase/firestore";
-import { Card } from 'react-bootstrap';
+import { getFirestore, updateDoc, collection, addDoc, getDocs, query, onSnapshot, where, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
+import { Button, Card, Modal } from 'react-bootstrap';
 import moment from 'moment';
 import './home.css'
 import { Link } from 'react-router';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Home = () => {
 
@@ -14,8 +15,12 @@ const Home = () => {
   const [showForm , setShowForm] = useState(false);
   const [postCaption , setPostCaption] = useState("");
   const [posts, setPosts] = useState([]);
-
   const [file , setFile] = useState();
+
+  const [show , setShow] = useState(false);
+
+  const [currentCaption , setCurrentCaption] = useState("");
+  const [currentPostId , setCurrentPostId] = useState("")
 
   let {state, dispatch} = useContext(GlobalContext);
 
@@ -49,8 +54,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-
-    console.log("Component Mount")
     // getPost();
 
     let unsubscribe;
@@ -60,7 +63,7 @@ const Home = () => {
       unsubscribe = onSnapshot(q, (querySnapshot) => {
         let realTimePost = []
         querySnapshot.forEach((doc) => {
-          realTimePost.push(doc.data())
+          realTimePost.push({...doc.data() , id: doc.id})
         });
         setPosts(realTimePost);
       });
@@ -80,20 +83,56 @@ const Home = () => {
     formData.append("upload_preset", "posts-image");
 
     try {
-      const res = await axios.post("https://api.cloudinary.com/v1_1/dw2jrfzql/upload", formData);
-      const docRef = await addDoc(collection(db, "posts"), {
-        userName: state.user?.displayName,
-        userEmail: state.user?.email,
-        userProfile: state.user?.photoURL,
-        userId: state.user?.uid,
-        postText: postCaption,
-        postDate: new Date().getTime(),
-        postFile: res.data.url
-      });
-      setPostCaption("");
+      if(file){
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dw2jrfzql/upload", formData);
+        const docRef = await addDoc(collection(db, "posts"), {
+          userName: state.user?.displayName,
+          userEmail: state.user?.email,
+          userProfile: state.user?.photoURL,
+          userId: state.user?.uid,
+          postText: postCaption,
+          postDate: serverTimestamp(),
+          postFile: res.data.url
+        });
+        setPostCaption("");
+      }else{
+        const docRef = await addDoc(collection(db, "posts"), {
+          userName: state.user?.displayName,
+          userEmail: state.user?.email,
+          userProfile: state.user?.photoURL,
+          userId: state.user?.uid,
+          postText: postCaption,
+          postDate: serverTimestamp(),
+          postFile: ""
+        });
+        setPostCaption("");
+      }
     } catch (error) {
       console.error("Error adding document: ", error);
     }
+  }
+
+  const deletePost = async(id) => {
+    await deleteDoc(doc(db, "posts", id));
+  }
+
+  const updatePost = async() => {
+    await updateDoc(doc(db, "posts", currentPostId), {
+      postText: currentCaption
+    });
+    handleClose()
+  }
+
+  const handleClose = () => {
+    setShow(false)
+    setCurrentCaption("")
+    setCurrentPostId("")
+  }
+
+  const editPost = (val , id) => {
+    setShow(true);
+    setCurrentCaption(val);
+    setCurrentPostId(id)
   }
 
   return (
@@ -131,22 +170,44 @@ const Home = () => {
 
       <div className="p-3 d-flex flex-column align-items-center row-gap-3">
         {posts.map((eachPost , i) => {
-          console.log("eachPost" , eachPost)
+          let slittedFileName = eachPost?.postFile?.split(".");
+          let fileExtension = slittedFileName[slittedFileName.length - 1]
           return(
             <Card key={i} style={{ width: '20rem' }} className='p-4'>
-              <div className="postHead">
-                <div className="userProfile">
-                  <img src={eachPost?.userProfile} alt="" />
+              <div className="d-flex align-items-center justify-content-between">
+                <div className="postHead">
+                  <div className="userProfile">
+                    <img src={eachPost?.userProfile} alt="" />
+                  </div>
+                  <div className="postDetail">
+                    <h6>{eachPost?.userName}</h6>
+                    <p>{moment(eachPost?.postDate).fromNow()}</p>
+                  </div>
                 </div>
-                <div className="postDetail">
-                  <h6>{eachPost?.userName}</h6>
-                  <p>{moment(eachPost?.postDate).fromNow()}</p>
-                </div>
+                <button onClick={() => {
+                  Swal.fire({
+                    title: "Do you want delete this post?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Delete",
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                      deletePost(eachPost.id)
+                      // Swal.fire("Saved!", "", "success");
+                    }
+                  });
+                }}>delete</button>
+
+                <button onClick={() => {editPost(eachPost.postText , eachPost?.id)}}>Edit</button>
               </div>
               <div className="postContent pt-4">
                 <p className='m-0'>{eachPost?.postText}</p>
                 {(eachPost?.postFile) ?
-                  <img src={eachPost?.postFile} alt="" style={{width: "100%"}} />
+                  (fileExtension == "mp4")?
+                    <video src={eachPost?.postFile} controls style={{width: "100%"}}></video>
+                    :
+                    <img src={eachPost?.postFile} alt="" style={{width: "100%"}} />
                   :
                   null
                 }
@@ -156,6 +217,22 @@ const Home = () => {
         })}
       </div>
 
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input type="text" value={currentCaption} onChange={(e) => {setCurrentCaption(e.target.value)}} className='w-100 py-2 px-1 rounded-2' />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={updatePost}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
