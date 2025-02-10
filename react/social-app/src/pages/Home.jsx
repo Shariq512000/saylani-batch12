@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../context/Context'
 import { getAuth, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth";
-import { getFirestore, updateDoc, collection, addDoc, getDocs, query, onSnapshot, where, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
+import { getFirestore, updateDoc, collection, addDoc, getDocs, query, onSnapshot, where, deleteDoc, doc, serverTimestamp, Timestamp, orderBy } from "firebase/firestore";
 import { Button, Card, Modal } from 'react-bootstrap';
 import moment from 'moment';
 import './home.css'
 import { Link } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import PostCard from '../component/PostCard';
 
 const Home = () => {
 
@@ -59,7 +60,7 @@ const Home = () => {
     let unsubscribe;
 
     const getRealTimeUpdates = () => {
-      const q = query(collection(db, "posts"));
+      const q = query(collection(db, "posts"), orderBy("postDate", "desc"));
       unsubscribe = onSnapshot(q, (querySnapshot) => {
         let realTimePost = []
         querySnapshot.forEach((doc) => {
@@ -79,11 +80,14 @@ const Home = () => {
     e.preventDefault()
 
     const formData = new FormData();
+    // {}
     formData.append("file", file);
+    //{file: file}
     formData.append("upload_preset", "posts-image");
+    //{file: file, upload_preset: posts-image}
 
     try {
-      if(file){
+      if(file){                                                       //Cloud Name
         const res = await axios.post("https://api.cloudinary.com/v1_1/dw2jrfzql/upload", formData);
         const docRef = await addDoc(collection(db, "posts"), {
           userName: state.user?.displayName,
@@ -170,49 +174,11 @@ const Home = () => {
 
       <div className="p-3 d-flex flex-column align-items-center row-gap-3">
         {posts.map((eachPost , i) => {
+          console.log("eachPost" , eachPost)
           let slittedFileName = eachPost?.postFile?.split(".");
           let fileExtension = slittedFileName[slittedFileName.length - 1]
           return(
-            <Card key={i} style={{ width: '20rem' }} className='p-4'>
-              <div className="d-flex align-items-center justify-content-between">
-                <div className="postHead">
-                  <div className="userProfile">
-                    <img src={eachPost?.userProfile} alt="" />
-                  </div>
-                  <div className="postDetail">
-                    <h6>{eachPost?.userName}</h6>
-                    <p>{moment(eachPost?.postDate).fromNow()}</p>
-                  </div>
-                </div>
-                <button onClick={() => {
-                  Swal.fire({
-                    title: "Do you want delete this post?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Delete",
-                  }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                      deletePost(eachPost.id)
-                      // Swal.fire("Saved!", "", "success");
-                    }
-                  });
-                }}>delete</button>
-
-                <button onClick={() => {editPost(eachPost.postText , eachPost?.id)}}>Edit</button>
-              </div>
-              <div className="postContent pt-4">
-                <p className='m-0'>{eachPost?.postText}</p>
-                {(eachPost?.postFile) ?
-                  (fileExtension == "mp4")?
-                    <video src={eachPost?.postFile} controls style={{width: "100%"}}></video>
-                    :
-                    <img src={eachPost?.postFile} alt="" style={{width: "100%"}} />
-                  :
-                  null
-                }
-              </div>
-            </Card>
+            <PostCard eachPost={eachPost} fileExtension={fileExtension} editPost={editPost} deletePost={deletePost} />
           )
         })}
       </div>
