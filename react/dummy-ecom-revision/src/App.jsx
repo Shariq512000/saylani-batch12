@@ -33,10 +33,18 @@ const App = () => {
 
   return(
     <div>
-      <Link to={"/login"}>Login</Link>
-      <br />
-      <Link to={"/home"}>Home</Link>
-      <br />
+      <header className="flex items-center justify-between px-10 py-4 bg-rose-200">
+        <div className="logo">
+          NEW LOGO
+        </div>
+        <nav>
+          <ul className="flex gap-x-3">
+            <li><Link to={"/login"} className="text-black text-sm">Login</Link></li>
+            <li><Link to={"/home"} className="text-black text-sm">Home</Link></li>
+          </ul>
+        </nav>
+      </header>
+      
       {(state.isLogin == true) ?
         <Routes>
           <Route path="/home" element={<Home />} />
