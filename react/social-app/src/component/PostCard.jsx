@@ -7,11 +7,11 @@ import Swal from 'sweetalert2';
 const PostCard = ({eachPost, editPost, deletePost, fileExtension}) => {
     let {state , dispatch} = useContext(GlobalContext)
     return (
-        <Card style={{ width: '20rem' }} className='p-4'>
+        <Card style={{ width: '20rem' }} className='p-4 !tw-bg-theme-200'>
             <div className="d-flex align-items-center justify-content-between">
             <div className="postHead">
                 <div className="userProfile">
-                <img src={eachPost?.userProfile} alt="" />
+                    <img src={eachPost?.userProfile || '/defaultProfile.png'} alt="" onError={(e) => {e.target.src = '/defaultProfile.png'}} />
                 </div>
                 <div className="postDetail">
                 <h6>{eachPost?.userName}</h6>

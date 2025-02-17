@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import PostCard from '../component/PostCard';
+// import defaultImage from ''
 
 const Home = () => {
 
@@ -178,7 +179,7 @@ const Home = () => {
           let slittedFileName = eachPost?.postFile?.split(".");
           let fileExtension = slittedFileName[slittedFileName.length - 1]
           return(
-            <PostCard eachPost={eachPost} fileExtension={fileExtension} editPost={editPost} deletePost={deletePost} />
+            <PostCard key={i} eachPost={eachPost} fileExtension={fileExtension} editPost={editPost} deletePost={deletePost} />
           )
         })}
       </div>

@@ -38,10 +38,11 @@ const App = () => {
           NEW LOGO
         </div>
         <nav>
-          <ul className="flex gap-x-3">
+          <ul className="md:flex gap-x-3 hidden">
             <li><Link to={"/login"} className="text-black text-sm">Login</Link></li>
             <li><Link to={"/home"} className="text-black text-sm">Home</Link></li>
           </ul>
+          <div className="text-[30px] block md:hidden">&#8801;</div>
         </nav>
       </header>
       

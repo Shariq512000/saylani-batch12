@@ -43,35 +43,38 @@ const Login = () => {
     })
 
   return (
-    <div>
-        <form onSubmit={loginFormik.handleSubmit}>
-            <label htmlFor="userName">
-                User Name: <input type="text" id='userName' name='userName' value={loginFormik.values.userName} onChange={loginFormik.handleChange} />
-            </label>
-            <br />
-            {
-                (loginFormik.touched.userName && Boolean(loginFormik.errors.userName)) ?
-                    <span style={{ color: "red" }}>{loginFormik.errors.userName}</span>
-                    :
-                    null
-            }
+    <div className='flex justify-center pt-12 bg-gradient-to-r from-ali-300 to-red-500'>
+        <div className="w-[520px] bg-white md:bg-gray-700 p-5 rounded-md shadow-xl border">
+            <form onSubmit={loginFormik.handleSubmit}>
+                <label htmlFor="userName" className='flex md:flex-row items-center gap-x-3 flex-col'>
+                    <span>User Name: </span>
+                    <input type="text" className='border px-3 py-1 text-lg' id='userName' name='userName' value={loginFormik.values.userName} onChange={loginFormik.handleChange} />
+                </label>
+                {
+                    (loginFormik.touched.userName && Boolean(loginFormik.errors.userName)) ?
+                        <span style={{ color: "red" }}>{loginFormik.errors.userName}</span>
+                        :
+                        null
+                }
 
-            <br />
-            <label htmlFor="password">
-                Password: <input type={isShow ? "text" : "password"} id='password' name='password' value={loginFormik.values.password} onChange={loginFormik.handleChange} />
-            </label>
-            <span style={{display: "inline-block", cursor: "pointer"}} onClick={() => {setIsShow(!isShow)}}>{isShow? "Hide" : "Show"}</span>
-            <br />
-            {
-                (loginFormik.touched.password && Boolean(loginFormik.errors.password)) ?
-                    <span style={{ color: "red" }}>{loginFormik.errors.password}</span>
-                    :
-                    null
-            }
-            <br />
-
-            <button type="submit">Login</button>
-        </form>
+                <br />
+                <label htmlFor="password" className='flex md:flex-row flex-col items-center gap-x-3'>
+                    <span>Password:</span> <input className='border px-3 py-1 text-lg' type={isShow ? "text" : "password"} id='password' name='password' value={loginFormik.values.password} onChange={loginFormik.handleChange} />
+                </label>
+                <span style={{display: "inline-block", cursor: "pointer"}} onClick={() => {setIsShow(!isShow)}}>{isShow? "Hide" : "Show"}</span>
+                <br />
+                {
+                    (loginFormik.touched.password && Boolean(loginFormik.errors.password)) ?
+                        <span style={{ color: "red" }}>{loginFormik.errors.password}</span>
+                        :
+                        null
+                }
+                <br />
+                <div className="flex justify-center">
+                    <button type="submit" className='bg-blue-500 text-white font-semibold px-3 py-1 rounded hover:bg-blue-700 transition-all duration-500'>Login</button>
+                </div>
+            </form>
+        </div>
     </div>
   )
 }
