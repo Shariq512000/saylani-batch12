@@ -140,38 +140,33 @@ const Home = () => {
     setCurrentPostId(id)
   }
 
+  console.log("FILE" , file)
+
   return (
-    <div>
-
-      <Link to={"/profile"}>Profile</Link>
+    <div className='tw-bg-slate-400 dark:tw-bg-red-400'>
       
-      <h1>{state?.user?.displayName}</h1>
-      <h6>{state?.user?.email}</h6>
+      <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+        <div className="">
+          <h1>{state?.user?.displayName}</h1>
+          <h6>{state?.user?.email}</h6>
+        </div>
 
-      {/* <button onClick={() => setShowForm((oldValue) => !oldValue)}>
-        {showForm ? "Hide" : "Show"} Form
-      </button> */}
-
-
-      {/* {(showForm)?
-        <form onSubmit={changeEmail}>
-          <label htmlFor="newEmail">
-            New Email: <input value={newEmail} type="email" onChange={(e) => {setNewEmail(e.target.value)}} required />
-
-            <button type='submit'>Submit</button>
-          </label>
+        <form onSubmit={addPost} className='tw-flex tw-w-[320px] tw-flex-col tw-gap-y-2'>
+          <textarea className='tw-border tw-border-black tw-p-3 tw-rounded focus:tw-outline-none' placeholder={`what's on your mind`} onChange={(e) => {setPostCaption(e.target.value)}}></textarea>
+          
+          <div className="tw-relative tw-w-full">
+            <div className="tw-flex tw-flex-col tw-items-center tw-gap-x-2 tw-border tw-border-black tw-rounded tw-p-3">
+              <span className="material-symbols-outlined">
+                upload
+              </span>
+              {(file) ? file?.name : "Click to Upload Or Drag To Upload"}
+            </div>
+            <input type="file" className='tw-absolute tw-top-0 tw-right-0 tw-bottom-0 tw-left-0 tw-w-full tw-h-full tw-opacity-0' onChange={(e) => {setFile(e?.target?.files[0])}} />
+          </div>
+          
+          <button className='tw-bg-transparent tw-text-blue-500 tw-px-3 tw-py-1 tw-transition-all tw-duration-500 tw-rounded tw-border tw-border-blue-500 hover:tw-bg-blue-500 hover:tw-text-white'>Post</button>
         </form>
-        :
-        null
-      } */}
-
-      <form onSubmit={addPost}>
-        <textarea placeholder={`what's on your mind`} onChange={(e) => {setPostCaption(e.target.value)}}></textarea>
-        <br />
-        <input type="file" onChange={(e) => {setFile(e?.target?.files[0])}} />
-        <br />
-        <button>Post</button>
-      </form>
+      </div>
 
       <div className="p-3 d-flex flex-column align-items-center row-gap-3">
         {posts.map((eachPost , i) => {

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 const PostCard = ({eachPost, editPost, deletePost, fileExtension}) => {
     let {state , dispatch} = useContext(GlobalContext)
     return (
-        <Card style={{ width: '20rem' }} className='p-4 !tw-bg-theme-200'>
+        <Card style={{ width: '20rem' }} className='p-4 !tw-bg-theme-200 hover:!tw-bg-red-400 tw-transition-all tw-duration-1000'>
             <div className="d-flex align-items-center justify-content-between">
             <div className="postHead">
                 <div className="userProfile">

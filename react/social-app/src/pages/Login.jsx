@@ -87,52 +87,50 @@ const Login = () => {
         setShow(false);
     }
 
-  return (
-    <div>
-        <form onSubmit={loginUser}>
-            <label htmlFor="email">
-                Email <input type="text" id='email' value={email} onChange={(e) => {setEmail(e?.target.value)}} />
-            </label>
-            <br />
-            <label htmlFor="">
-                Password<input type="text" value={password} onChange={(e) => {setPassword(e?.target.value)}} />
-            </label>
-            <br />
-            <div className="d-flex">
-                <p className='text-underline' onClick={() => {setShow(true)}} style={{textDecoration: "underline", cursor: "pointer"}}>Forgot Password</p>
-            </div>
-            <button>Login</button>
-        </form>
-
-        <button onClick={signupWithGithub}>Login With Github</button>
-
-        {/* <form>
-            <label htmlFor="">
-                Your Email: <input type="email" value={userEmail} onChange={(e) => {setUserEmail(e.target.value)}} />
-            </label>
-            <button type='submit'>Forget Password</button>
-        </form> */}
-
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Forgot Password</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <label htmlFor="">
-                    Enter Email : <input type="email" value={userEmail} onChange={(e) => {setUserEmail(e.target.value)}} />
+    return (
+        <div className='loginPage tw-flex tw-items-center tw-flex-col'>
+            <form onSubmit={loginUser} className='tw-flex tw-flex-col tw-gap-y-2 tw-items-center tw-border tw-border-slate-400 tw-p-8 tw-rounded-md tw-shadow-2xl'>
+                <label htmlFor="email" className='tw-flex tw-gap-x-3 tw-items-center'>
+                    Email <input type="text" id='email' value={email} className='tw-border-black tw-border tw-rounded tw-p-2 tw-text-base focus:tw-outline-none focus:tw-border-blue-500 focus:tw-text-blue-500' onChange={(e) => {setEmail(e?.target.value)}} />
                 </label>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={forgetPassword}>
-                    Send Email
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    </div>
-  )
+                <label htmlFor="" className='tw-flex tw-gap-x-3 tw-items-center'>
+                    Password<input type="text" placeholder='Password' className='tw-border-black tw-border tw-rounded tw-p-2 tw-text-base focus:tw-outline-none focus:tw-border-blue-500 focus:tw-text-blue-500' value={password} onChange={(e) => {setPassword(e?.target.value)}} />
+                </label>
+                <div className="tw-flex tw-justify-end tw-w-full">
+                    <p className='text-underline tw-mb-0' onClick={() => {setShow(true)}} style={{textDecoration: "underline", cursor: "pointer"}}>Forgot Password</p>
+                </div>
+                <button type='submit' className='tw-bg-transparent tw-text-blue-500 tw-px-3 tw-py-1 tw-transition-all tw-duration-500 tw-rounded tw-border tw-border-blue-500 hover:tw-bg-blue-500 hover:tw-text-white'>Login</button>
+                <button type='button' className='tw-bg-transparent tw-text-slate-500 tw-px-3 tw-py-1 tw-transition-all tw-duration-500 tw-rounded tw-border tw-border-slate-500 hover:tw-bg-slate-500 hover:tw-text-white' onClick={signupWithGithub}>Login With Github</button>
+            </form>
+
+
+            {/* <form>
+                <label htmlFor="">
+                    Your Email: <input type="email" value={userEmail} onChange={(e) => {setUserEmail(e.target.value)}} />
+                </label>
+                <button type='submit'>Forget Password</button>
+            </form> */}
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Forgot Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <label htmlFor="">
+                        Enter Email : <input type="email" value={userEmail} onChange={(e) => {setUserEmail(e.target.value)}} />
+                    </label>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={forgetPassword}>
+                        Send Email
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    )
 }
 
 export default Login
