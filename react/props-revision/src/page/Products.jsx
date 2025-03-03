@@ -1,10 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
-import Post from './component/Post';
+import logo from '../logo.svg';
+import '../App.css';
+import Post from '../component/Post';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function App() {
+function Products() {
 
   const [counter , setCounter] = useState(10);
   const [newCounter , setNewCounter] = useState(0);
@@ -1832,30 +1832,12 @@ function App() {
         console.log(eachProduct);
         return(
           <div style={{padding: 30, border: "1px solid black", marginBottom: 30, width:300}}>
+            <img src={eachProduct?.thumbnail} />
             <h1>{eachProduct.title}</h1>
             <p>{eachProduct.description}</p>
           </div>
         )
       })}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1884,4 +1866,4 @@ function App() {
   );
 }
 
-export default App;
+export default Products;
