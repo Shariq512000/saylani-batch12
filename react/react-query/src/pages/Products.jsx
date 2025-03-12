@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-query';
 
 const Products = () => {
 
@@ -14,9 +14,13 @@ const Products = () => {
         }
     }
 
-    const {data , isLoading, isError} = useQuery({
-        queryKey: ['product'],
-        queryFn: getProduct
+    const {data , isLoading, isError, error} = useQuery({
+        queryKey: 'product',
+        queryFn: getProduct,
+        gcTime: 20000, // default 5 minutes
+        // staleTime: 5000, // default 0 millisecond
+        // refetchInterval: 2000,
+        // refetchIntervalInBackground: true
     })
 
   return (

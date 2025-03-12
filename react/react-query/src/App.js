@@ -3,7 +3,8 @@ import './App.css';
 import Header from './component/header';
 import Routing from './component/routing';
 import Footer from './component/footer';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function App() {
   const queryClient = new QueryClient()
@@ -14,6 +15,7 @@ function App() {
         <Routing />
         <Footer />
       </div>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
