@@ -1,6 +1,50 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .box{
   width: 100px;
   height: 100px;
   background-color: red;
   border-radius: 8px;
+}
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+.logo{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+nav ul{
+  display: flex;
+  list-style: none;
+  align-items: center;
+  column-gap: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+section{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+section h1{
+  font-size: 40px;
+}
+#sec1{
+  background-color: brown;
+}
+
+#sec2{
+  background-color: blueviolet;
+}
+
+#sec2{
+  background-color: salmon;
 }
