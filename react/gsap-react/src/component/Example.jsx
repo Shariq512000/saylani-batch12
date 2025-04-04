@@ -14,7 +14,7 @@ const Example = () => {
             scale: 3,
             duration: 1.5,
             delay: 1.5,
-            opacity: 0
+            opacity: 0,
         })
     })
   return (
@@ -34,4 +34,4 @@ const Example = () => {
   )
 }
 
-export default Example
+export default Example;
