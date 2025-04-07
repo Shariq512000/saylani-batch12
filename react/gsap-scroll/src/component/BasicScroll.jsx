@@ -13,21 +13,19 @@ function BasicScroll() {
       opacity: 0,
       delay: 1,
       duration: 2,
-      repeat: -1,
-      yoyo: true
+      // repeat: -1,
+      // yoyo: true
     })
 
     gsap.from("#page2 .box", {
-      // rotate: 360,
-      // scale: 0.3,
       opacity: 0,
-      // duration: 2,
       x: -1000,
+      // duration: 3,
       scrollTrigger: {
         trigger: "#page2 .box",
         markers: true,
-        start: "top 48%",
-        end: "top 25%",
+        start: "top 50%",
+        end: "top 30%",
         scrub: 2
       }
     })

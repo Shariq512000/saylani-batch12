@@ -13,7 +13,7 @@ const SlideSection = () => {
             scrollTrigger:{
                 trigger: "#page2",
                 markers: true,
-                scrub: 2,
+                scrub: true,
                 pin: true
             }
         })

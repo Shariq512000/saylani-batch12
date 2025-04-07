@@ -26,6 +26,7 @@ body{
 #page2 h1{
   font-size: 700px;
   line-height: 1;
+  /* margin-left: 50px; */
   /* transform: translateX(-60%); */
 }
 
@@ -52,4 +53,48 @@ body{
 #page3 h4{
   font-size: 30px;
   background-color: yellow;
+}
+
+
+/* ///// */
+
+#demo {
+  position: relative;
+}
+#quote {
+  font-size: 3vw;
+  line-height: 1.2;
+  pointer-events: none;
+  color: #dfdcff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 10px;
+  margin: 20px 0;
+}
+
+#nav {
+  padding-bottom: 20px;
+}
+
+.word {
+  border: 1px dashed var(--color-surface-white);
+  background-image: var(--color-text-gradient);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#instructions {
 }
