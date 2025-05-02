@@ -41,7 +41,6 @@ export default function Home() {
 
   useEffect(() => {
     axios.get(`${baseUrl}/get-products`).then((res) => {
-      // console.log(res.data)
       setAllProducts(res.data)
     }).catch((err) => {
       console.log(err)

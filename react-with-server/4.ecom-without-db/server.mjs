@@ -19,30 +19,38 @@ app.post('/add-product', (req , res) => {
         res.send("Required Parameter Missing")
         return;
     }
-    let product = {
-        id: new Date().getTime(),
-        name: reqBody.name,
-        description: reqBody.description,
-        price: reqBody.price
-    }
-    products.push(product);
+
+    // let product = 
+    products.push(
+        {
+            id: new Date().getTime(),
+            name: reqBody.name,
+            description: reqBody.description,
+            price: reqBody.price
+        }
+    );
     res.send("Product Added Successful")
 })
 
 app.delete('/delete-product/:id' , (req , res) => {
     const productId = req.params.id;
 
-    // let products = [
-    //     {id: 1} , {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}
-    // ]
-    
-    // products.splice(2,1)
+    let isMatched = false;
 
     for(let i=0; i < products.length; i++){
         if(products[i].id == productId){
-            products.splice(i , 1)
+            isMatched = true;
+            products.splice(i , 1);
+            break;
         }
     }
+
+    if(isMatched){
+        res.send("Product Deleted");
+    }else{
+        res.send(`product id (${productId}) did not matched`)
+    }
+
 })
 
 // app.put('/edit-product' , (req , res) => {
