@@ -7,7 +7,7 @@ const port = 5002;
 app.use(cors());
 app.use(express.json());
 
-let products = []; /// TODO REPLACE WITH DATABASE
+let products = [] /// TODO REPLACE WITH DATABASE
 
 app.get('/get-products' , (req , res) => {
     res.send(products)
@@ -47,6 +47,46 @@ app.delete('/delete-product/:id' , (req , res) => {
 
     if(isMatched){
         res.send("Product Deleted");
+    }else{
+        res.send(`product id (${productId}) did not matched`)
+    }
+
+})
+
+app.put('/edit-product/:id' , (req , res) => {
+    let reqBody = req.body;
+    let productId = req.params.id
+    if(!reqBody?.name || !reqBody?.description || !reqBody?.price){
+        res.send("Required Parameter Missing")
+        return;
+    }
+
+    let isMatched = false;
+
+    for(let i=0; i < products.length; i++){
+        if(products[i].id == productId){
+            isMatched = true;
+            // products[i].name = reqBody.name
+            // products[i].price = reqBody.price
+            // products[i].description = reqBody.description
+            products[i] = {
+                id: productId,
+                name: reqBody.name,
+                price: reqBody.price,
+                description: reqBody.description
+            }
+            // products.splice(i , 1 , {
+            //     id: productId,
+            //     name: reqBody.name,
+            //     price: reqBody.price,
+            //     description: reqBody.description
+            // })
+            break;
+        }
+    }
+
+    if(isMatched){
+        res.send("Product Updated");
     }else{
         res.send(`product id (${productId}) did not matched`)
     }

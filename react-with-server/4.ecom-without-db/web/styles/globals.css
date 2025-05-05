@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+.popupLayout{
+    position: fixed;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(2px);
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    right: 0;
+}
+.customPopup{
+    position: fixed;
+    width: 50%;
+    top: 0;
+    background: white;
+    margin: 50px 0 0 50px;
+    padding: 20px;
+    border-radius: 8px;
+}
