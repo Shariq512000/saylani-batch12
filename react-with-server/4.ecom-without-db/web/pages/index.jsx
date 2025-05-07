@@ -17,7 +17,7 @@ export default function Home() {
   const addProduct = (e) => {
     e.preventDefault();
     // console.log(productName, productPrice, productDes)
-    axios.post(`${baseUrl}/add-product`,{
+    axios.post(`${baseUrl}/product`,{
       name: productName,
       price: productPrice,
       description: productDes
@@ -28,7 +28,8 @@ export default function Home() {
       setProductPrice("");
       setApiLoad(!apiLoad)
     }).catch((err) => {
-      console.log(err)
+      // console.log("err" , err)
+      alert(err.response.data.message)
     })
 
 
@@ -42,8 +43,9 @@ export default function Home() {
   }
 
   useEffect(() => {
-    axios.get(`${baseUrl}/get-products`).then((res) => {
-      setAllProducts(res.data)
+    axios.get(`${baseUrl}/products`).then((res) => {
+      console.log(res.data);
+      setAllProducts(res.data.product_list)
     }).catch((err) => {
       console.log(err)
     })
@@ -55,7 +57,7 @@ export default function Home() {
 
   const deleteProduct = (productId) => {
     // /delete-product/:id
-    axios.delete(`${baseUrl}/delete-product/${productId}`).then((res) => {
+    axios.delete(`${baseUrl}/product/${productId}`).then((res) => {
       console.log(res.data)
       setApiLoad(!apiLoad)
     }).catch((err) => {
@@ -64,7 +66,6 @@ export default function Home() {
   }
 
   const editProduct = (data) => {
-    console.log("Data" , data)
     setEditId(data.id);
     setProductName(data.name);
     setProductPrice(data.price)
@@ -82,11 +83,14 @@ export default function Home() {
 
   const updateProduct = (e) => {
     e.preventDefault();
-    axios.put(`${baseUrl}/edit-product/${editId}`,{
+    axios.put(`${baseUrl}/product/${editId}`,{
       name: productName,
       price: productPrice,
       description: productDes
-    }).then((res) => {console.log("Res" , res)}).catch((err) => {
+    }).then((res) => {
+      closePopup();
+      setApiLoad(!apiLoad)
+    }).catch((err) => {
       console.log("Err" , err)
     })
   }

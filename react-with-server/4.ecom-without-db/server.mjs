@@ -7,16 +7,20 @@ const port = 5002;
 app.use(cors());
 app.use(express.json());
 
-let products = [] /// TODO REPLACE WITH DATABASE
+let products = []; /// TODO REPLACE WITH DATABASE
 
-app.get('/get-products' , (req , res) => {
-    res.send(products)
+app.get('/products' , (req , res) => {
+    res.status(200).send({message: "Product Found", product_list: products})
 })
 
-app.post('/add-product', (req , res) => {
+// app.get('/product/:id' , (req , res) => {
+//     res.send(products)
+// })
+
+app.post('/product', (req , res) => {
     let reqBody = req.body;
     if(!reqBody?.name || !reqBody?.description || !reqBody?.price){
-        res.send("Required Parameter Missing")
+        res.status(400).send({message: "Required Parameter Missing"})
         return;
     }
 
@@ -29,10 +33,10 @@ app.post('/add-product', (req , res) => {
             price: reqBody.price
         }
     );
-    res.send("Product Added Successful")
+    res.status(201).send({message: "Product Added Successful"})
 })
 
-app.delete('/delete-product/:id' , (req , res) => {
+app.delete('/product/:id' , (req , res) => {
     const productId = req.params.id;
 
     let isMatched = false;
@@ -46,18 +50,18 @@ app.delete('/delete-product/:id' , (req , res) => {
     }
 
     if(isMatched){
-        res.send("Product Deleted");
+        res.status(202).send({message: "Product Deleted"});
     }else{
-        res.send(`product id (${productId}) did not matched`)
+        res.status(400).send({message: `product id (${productId}) did not matched`})
     }
 
 })
 
-app.put('/edit-product/:id' , (req , res) => {
+app.put('/product/:id' , (req , res) => {
     let reqBody = req.body;
     let productId = req.params.id
     if(!reqBody?.name || !reqBody?.description || !reqBody?.price){
-        res.send("Required Parameter Missing")
+        res.status(400).send({message: "Required Parameter Missing"})
         return;
     }
 
@@ -66,36 +70,36 @@ app.put('/edit-product/:id' , (req , res) => {
     for(let i=0; i < products.length; i++){
         if(products[i].id == productId){
             isMatched = true;
+
             // products[i].name = reqBody.name
             // products[i].price = reqBody.price
             // products[i].description = reqBody.description
+            
             products[i] = {
                 id: productId,
                 name: reqBody.name,
                 price: reqBody.price,
                 description: reqBody.description
             }
+
             // products.splice(i , 1 , {
             //     id: productId,
             //     name: reqBody.name,
             //     price: reqBody.price,
             //     description: reqBody.description
             // })
+            
             break;
         }
     }
 
     if(isMatched){
-        res.send("Product Updated");
+        res.status(204).send("Product Updated");
     }else{
-        res.send(`product id (${productId}) did not matched`)
+        res.status(400).send({message: `product id (${productId}) did not matched`})
     }
 
 })
-
-// app.put('/edit-product' , (req , res) => {
-
-// })
 
 app.listen(port , () => {
     console.log(`App is Running on port ${port}`)
