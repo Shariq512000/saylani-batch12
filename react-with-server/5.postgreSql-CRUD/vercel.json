@@ -1,0 +1,16 @@
+{
+    "version": 2,
+    "builds": [
+     {
+      "src": "server.mjs",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+     }
+    ],
+    "routes": [
+     {
+      "src": "/(.*)",
+      "dest": "server.mjs"
+     }
+    ]
+}
