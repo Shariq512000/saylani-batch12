@@ -11,7 +11,7 @@ app.use(cors());
 
 app.get('/products' , async(req , res) => {
     try {
-        let result = await db.query(`SELECT * FROM products`);
+        let result = await db.query(`SELECT * FROM products ORDER BY id DESC`);
         res.status(200).send({message: "Product Found" , product_list: result.rows})
     } catch (error) {
         console.log("error" , error)
@@ -29,6 +29,24 @@ app.post('/product' , async(req , res) => {
         let result = await db.query(`INSERT INTO products (name , price , description) VALUES ('${reqBody.name}' , ${reqBody.price} , '${reqBody.description}')`)
         res.status(201).send({message: "Product Added"})
     }catch(error){
+        res.status(500).send({message: "Internal Server Error"})
+    }
+})
+
+app.put('/product/:id' , async(req , res) => {
+    let productId = req.params.id; // 6
+    let reqBody = req.body;
+    if(!reqBody.name || !reqBody.price || !reqBody.description){
+        res.status(400).send({message : "Required Parameter Missing"})
+        return;
+    }
+    try {
+        let result = await db.query(`UPDATE products SET 
+            name = '${reqBody.name}', price = ${reqBody.price}, description = '${reqBody.description}'
+            WHERE id = ${productId};
+        `);
+        res.status(204).send({message: "Product Updated Successfully"})
+    } catch (error) {
         res.status(500).send({message: "Internal Server Error"})
     }
 })
