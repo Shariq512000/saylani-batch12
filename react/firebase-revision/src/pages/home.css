@@ -1,0 +1,58 @@
+.postHead{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+.userProfile{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.userProfile img{
+    width: 100%;
+    height: 100%;
+}
+.postDetail{
+    display: flex;
+    flex-direction: column;
+}
+.postDetail h6{
+    color: #000;
+    font-weight: 600;
+    margin: 0;
+}
+.postDetail p{
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+.eventCard{
+    padding: 25px;
+    border: 1px solid #e9e9e9;
+    background-color: white;
+    border-radius: 12px;
+    width: 400px;
+}
+.userDetail{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.userDetail .profile img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.userDetail .userData h6{
+    color: #000;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+.userDetail .userData p{
+    color: #666;
+    margin: 0;
+    padding: 0;
+}

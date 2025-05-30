@@ -1,0 +1,62 @@
+
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 35px;
+}
+.logo{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: aqua;
+}
+nav ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.dashboardPage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboardPage table th, .dashboardPage table td{
+  border: 1px solid #D9d9d9;
+  padding: 10px 25px;
+}
+.dashboardPage table th{
+  background-color: #e9e9e9;
+}
+
+.dashboardPage table td img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.changeStatus label{
+  color: #333;
+  font-weight: 600;
+}
+
+.changeStatus select{
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+.btnWrapper{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
