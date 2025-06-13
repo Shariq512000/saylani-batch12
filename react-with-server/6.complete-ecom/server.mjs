@@ -1,11 +1,15 @@
+import 'dotenv/config'
 import express from 'express';
 import { db } from './db.mjs';
 import cors from 'cors';
 import bcrypt from "bcryptjs";
-import { customAlphabet } from 'nanoid'
+import { customAlphabet } from 'nanoid';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 const PORT = 5004;
+
+const SECRET = process.env.SECRET_TOKEN;
 
 app.use(express.json());
 // app.use(cors({
@@ -58,6 +62,7 @@ app.post('/login' , async(req , res) => {
         res.status(400).send({message: "Required Parameter Missing"})
         return;
     }
+    reqBody.email = reqBody.email.toLowerCase();
     let query = `SELECT * FROM users WHERE email = $1`;
     let values = [reqBody.email];
 
@@ -67,7 +72,44 @@ app.post('/login' , async(req , res) => {
             res.status(400).send({message: "User Doesn't exist with this Email"});
             return;
         }
+        // let user = result.rows[0]
+        // console.log("Result" , result.rows);
+        let isMatched = await bcrypt.compare(reqBody.password, result.rows[0].password); // true
+
+        if(!isMatched){
+            res.status(401).send({message: "Password did not Matched"});
+            return;
+        }
+
+        let token = jwt.sign({
+            id: result.rows[0].user_id,
+            firstName: result.rows[0].first_name,
+            last_name: result.rows[0].last_name,
+            email: result.rows[0].email,
+            user_role: result.rows[0].user_role,
+            iat: Date.now() / 1000,
+            exp: (Date.now() / 1000) + (1000*60*60*24)
+        }, SECRET);
+
+        res.cookie('Token', token, {
+            maxAge: 86400000, // 1 day
+            httpOnly: true,
+            secure: true
+        });
+        res.status(200)
+        res.send({message: "User Logged in" , user: {
+            user_id: result.rows[0].user_id,
+            first_name: result.rows[0].first_name,
+            last_name: result.rows[0].last_name,
+            email: result.rows[0].email,
+            phone: result.rows[0].phone,
+            user_role: result.rows[0].user_role,
+            profile: result.rows[0].profile,
+        }})
+        // res.status(200).send({message: "Testing" , result: result.rows, isMatched})
+
     } catch (error) {
+        console.log("Error", error)
         res.status(500).send({message: "Internal Server Error"})
     }
 })
