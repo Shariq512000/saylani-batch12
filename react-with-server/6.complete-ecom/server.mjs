@@ -5,6 +5,7 @@ import cors from 'cors';
 import bcrypt from "bcryptjs";
 import { customAlphabet } from 'nanoid';
 import jwt from 'jsonwebtoken';
+import path from 'path';
 
 const app = express();
 const PORT = 5004;
@@ -12,19 +13,20 @@ const PORT = 5004;
 const SECRET = process.env.SECRET_TOKEN;
 
 app.use(express.json());
+app.use(cors());
 // app.use(cors({
 //     origin: ["http://localhost/3000" , ""]
 // }))
 // app.use(cors());
 
-app.get('/' , async(req , res) => {
-    try {
-        let result = await db.query('SELECT * FROM users')
-        res.status(200).send({message: "Success" , data: result.rows, result: result})
-    } catch (error) {
-        res.status(500).send({message: "Internal Server Error"})
-    }
-});
+// app.get('/' , async(req , res) => {
+//     try {
+//         let result = await db.query('SELECT * FROM users')
+//         res.status(200).send({message: "Success" , data: result.rows, result: result})
+//     } catch (error) {
+//         res.status(500).send({message: "Internal Server Error"})
+//     }
+// });
 
 app.post('/sign-up' , async(req, res) => {
     let reqBody = req.body;
@@ -113,6 +115,20 @@ app.post('/login' , async(req , res) => {
         res.status(500).send({message: "Internal Server Error"})
     }
 })
+
+app.get('/products', async(req , res) => {
+    try {
+        let result = await db.query(`SELECT * FROM products`);
+        res.status(200).send({message: "Product Found" , products: result.rows})
+    } catch (error) {
+        
+    }
+})
+
+const __dirname = path.resolve();//'D:\Shariq Siddiqui\saylani-batch12\react-with-server\6.complete-ecom/web/build'
+// const fileLocation = path.join(__dirname, './web/build')
+app.use('/', express.static(path.join(__dirname, './web/build')))
+app.use("/*splat" , express.static(path.join(__dirname, './web/build')))
 
 app.listen(PORT, () => {
     console.log("Server is Running")
