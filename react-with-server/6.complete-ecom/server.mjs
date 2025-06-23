@@ -28,6 +28,8 @@ app.use(cors());
 //     }
 // });
 
+// axios.get('/abc')
+
 app.post('/sign-up' , async(req, res) => {
     let reqBody = req.body;
     if(!reqBody.firstName || !reqBody.lastName || !reqBody.email || !reqBody.password){
@@ -116,16 +118,63 @@ app.post('/login' , async(req , res) => {
     }
 })
 
-app.get('/products', async(req , res) => {
+app.get('/categories' , async(req , res) => {
     try {
-        let result = await db.query(`SELECT * FROM products`);
-        res.status(200).send({message: "Product Found" , products: result.rows})
+        let result = await db.query(`SELECT * FROM categories`);
+        res.status(200).send({message: "Categories Found" , category_list: result.rows})
     } catch (error) {
-        
+        res.status(500).send({message: "Internal Server Error"})
     }
 })
 
-const __dirname = path.resolve();//'D:\Shariq Siddiqui\saylani-batch12\react-with-server\6.complete-ecom/web/build'
+app.post('/category' , async(req , res) => {
+    let reqBody = req.body
+    if(!reqBody.name || !reqBody.description){
+        res.status(400).send({message: "Required Parameter Missing"})
+        return;
+    }
+    try {
+        let query = `INSERT INTO categories(category_name , category_description) VALUES ($1, $2)`;
+        let values = [reqBody.name , reqBody.description]
+        let result = await db.query(query , values);
+        res.status(201).send({message: "Category Added"})
+    } catch (error) {
+        console.log("Error" , error)
+        res.status(500).send({message: "Internal Server Error", error})
+    }
+})
+
+app.get('/products', async(req , res) => {
+    try {
+        let result = await db.query(`SELECT p.product_id, p.product_name, p.price, p.description, p.created_at, c.category_name 
+        FROM products AS p 
+        INNER JOIN categories c ON p.category_id = c.category_id`);
+        res.status(200).send({message: "Product Found" , products: result.rows})
+    } catch (error) {
+        console.log("error" , error)
+        res.status(500).send({message: "Internal Server Error"})
+    }
+})
+
+app.post('/product' , async(req , res) => {
+    // let reqBody = req.body
+    let {name, description, price, category_id, image} = req.body;
+    if(!name || !description || !price || !category_id || !image){
+        res.status(400).send({message: "Required Parameter Missing"})
+        return;
+    }
+    try {
+        let query = `INSERT INTO products(product_name , price, description, product_image, category_id) VALUES ($1, $2, $3, $4, $5)`;
+        let values = [name , price, description, image, category_id]
+        let result = await db.query(query , values);
+        res.status(201).send({message: "Product Added"})
+    } catch (error) {
+        console.log("Error" , error)
+        res.status(500).send({message: "Internal Server Error", error})
+    }
+})
+
+const __dirname = path.resolve();//'D:\Shariq Siddiqui\saylani-batch12\react-with-server\6.complete-ecom'
 // const fileLocation = path.join(__dirname, './web/build')
 app.use('/', express.static(path.join(__dirname, './web/build')))
 app.use("/*splat" , express.static(path.join(__dirname, './web/build')))

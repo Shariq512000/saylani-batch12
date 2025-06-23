@@ -5,6 +5,7 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import Category from './pages/category';
 import AddProduct from './pages/add-product';
+import Home from './pages/home';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/category' element={<Category />} />
         <Route path='/add-product' element={<AddProduct />} />
+        <Route path='/home' element={<Home />} />
         <Route path='*' element={<Navigate to={"/sign-up"} />} />
       </Routes>
     </div>
