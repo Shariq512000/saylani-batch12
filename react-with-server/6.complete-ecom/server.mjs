@@ -134,7 +134,7 @@ app.post('/category' , async(req , res) => {
         return;
     }
     try {
-        let query = `INSERT INTO categories(category_name , category_description) VALUES ($1, $2)`;
+        let query = `INSERT INTO categories(category_name , description) VALUES ($1, $2)`;
         let values = [reqBody.name , reqBody.description]
         let result = await db.query(query , values);
         res.status(201).send({message: "Category Added"})
@@ -144,9 +144,15 @@ app.post('/category' , async(req , res) => {
     }
 })
 
+// let products = [{category_id: 1}];
+// p = products
+
+// let categories = [{category_id: 1, category_name: "abc"}, {category_id: 2, category_name: "def"}];
+// c = categories
+
 app.get('/products', async(req , res) => {
     try {
-        let result = await db.query(`SELECT p.product_id, p.product_name, p.price, p.description, p.created_at, c.category_name 
+        let result = await db.query(`SELECT p.product_id, p.product_name, p.price, p.product_image, p.description, p.created_at, c.category_name 
         FROM products AS p 
         INNER JOIN categories c ON p.category_id = c.category_id`);
         res.status(200).send({message: "Product Found" , products: result.rows})
