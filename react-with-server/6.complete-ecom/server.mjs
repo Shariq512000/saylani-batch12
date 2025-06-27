@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import { customAlphabet } from 'nanoid';
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = 5004;
@@ -13,6 +14,7 @@ const PORT = 5004;
 const SECRET = process.env.SECRET_TOKEN;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 // app.use(cors({
 //     origin: ["http://localhost/3000" , ""]
@@ -92,7 +94,7 @@ app.post('/login' , async(req , res) => {
             email: result.rows[0].email,
             user_role: result.rows[0].user_role,
             iat: Date.now() / 1000,
-            exp: (Date.now() / 1000) + (1000*60*60*24)
+            exp: (Date.now() / 1000) + (60*60*24)
         }, SECRET);
 
         res.cookie('Token', token, {
@@ -116,6 +118,45 @@ app.post('/login' , async(req , res) => {
         console.log("Error", error)
         res.status(500).send({message: "Internal Server Error"})
     }
+})
+
+app.use('/*splat' , (req, res, next) => {
+    if (!req?.cookies?.Token) {
+        res.status(401).send({
+            message: "Unauthorized"
+        })
+        return;
+    }
+
+    jwt.verify(req.cookies.Token, SECRET, (err, decodedData) => {
+        if (!err) {
+
+            console.log("decodedData: ", decodedData);
+
+            const nowDate = new Date().getTime() / 1000;
+
+            if (decodedData.exp < nowDate) {
+
+                res.status(401);
+                res.cookie('Token', '', {
+                    maxAge: 1,
+                    httpOnly: true,
+                    sameSite: "none",
+                    secure: true
+                });
+                res.send({ message: "token expired" })
+
+            } else {
+
+                console.log("token approved");
+
+                req.body.token = decodedData
+                next();
+            }
+        } else {
+            res.status(401).send("invalid token")
+        }
+    });
 })
 
 app.get('/categories' , async(req , res) => {
@@ -182,8 +223,8 @@ app.post('/product' , async(req , res) => {
 
 const __dirname = path.resolve();//'D:\Shariq Siddiqui\saylani-batch12\react-with-server\6.complete-ecom'
 // const fileLocation = path.join(__dirname, './web/build')
-app.use('/', express.static(path.join(__dirname, './web/build')))
-app.use("/*splat" , express.static(path.join(__dirname, './web/build')))
+app.use('/', express.static(path.join(__dirname, './frontend/build')))
+app.use("/*splat" , express.static(path.join(__dirname, './frontend/build')))
 
 app.listen(PORT, () => {
     console.log("Server is Running")

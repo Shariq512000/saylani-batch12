@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { GlobalContext } from '../context/Context';
 
 const Login = () => {
+
+    let {state, dispatch} = useContext(GlobalContext);
+
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
 
@@ -17,7 +21,10 @@ const Login = () => {
             })
             console.log(res.data);
             alert(res.data.message);
-            navigate('/home')
+            dispatch({type: "USER_LOGIN", user: res.data.user})
+            setTimeout(() => {
+                navigate('/home')
+            } , 1000)
 
         } catch (error) {
             console.log("Error" , error);
@@ -39,6 +46,8 @@ const Login = () => {
             </label>
             <br />
             <button type='submit'>Submit</button>
+            <br />
+            <p><Link to={'/sign-up'}>Sign up</Link></p>
         </form>
     </div>
   )
