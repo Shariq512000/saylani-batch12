@@ -8,7 +8,7 @@ const Home = () => {
   let {state} = useContext(GlobalContext)
   useEffect(() => {
     const getProduct = async() => {
-      let res = await axios.get('http://localhost:5004/products');
+      let res = await axios.get(`${state.baseUrl}/products`);
       console.log("res" , res.data)
       setProducts(res.data.products)
     }

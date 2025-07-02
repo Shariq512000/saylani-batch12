@@ -15,7 +15,7 @@ const Login = () => {
     const loginUser = async(e) => {
         e.preventDefault();
         try {
-            let res = await axios.post('http://localhost:5004/login', {
+            let res = await axios.post(`${state.baseUrl}/login`, {
                 email: email,
                 password: password
             })

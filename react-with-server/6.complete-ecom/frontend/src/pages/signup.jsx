@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router';
+import { GlobalContext } from '../context/Context';
 
 const Signup = () => {
+    let {state} = useContext(GlobalContext);
     const [firstName , setFirstName] = useState("");
     const [lastName , setLastName] = useState("");
     const [email , setEmail] = useState("");
@@ -13,7 +15,7 @@ const Signup = () => {
     const registerUser = async(e) => {
         e.preventDefault();
         try {
-            let res = await axios.post('http://localhost:5004/sign-up', {
+            let res = await axios.post(`${state.baseUrl}/sign-up`, {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,

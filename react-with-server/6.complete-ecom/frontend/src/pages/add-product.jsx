@@ -1,7 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { GlobalContext } from '../context/Context';
 
 const AddProduct = () => {
+    let {state} = useContext(GlobalContext)
     const [categoryList , setCategoryList] = useState([]);
     const [productName , setProductName] = useState("");
     const [productPrice , setProductPrice] = useState("");
@@ -24,7 +26,7 @@ const AddProduct = () => {
         e.preventDefault();
         // {name, description, price, category_id, image}
         try {
-            let response = await axios.post('http://localhost:5004/product' , {name: productName, price: productPrice, description: productDescription, category_id: productCategory, image: productImage})
+            let response = await axios.post(`${state.baseUrl}/product` , {name: productName, price: productPrice, description: productDescription, category_id: productCategory, image: productImage})
             clearForm();
             console.log("Response" , response);
         } catch (error) {

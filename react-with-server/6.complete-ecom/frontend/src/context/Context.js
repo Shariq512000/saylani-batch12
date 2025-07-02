@@ -5,7 +5,8 @@ export const GlobalContext = createContext("Initial Value");
 
 let data = {
     user: {},
-    isLogin: false
+    isLogin: false,
+    baseUrl: 'http://localhost:5004/api/v1'
 }
 
 export default function ContextProvider({ children }) {

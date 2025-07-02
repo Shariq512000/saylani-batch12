@@ -10,7 +10,8 @@ import { useContext } from 'react';
 import { GlobalContext } from './context/Context';
 
 function App() {
-  let {state, dispatch} = useContext(GlobalContext)
+  let {state, dispatch} = useContext(GlobalContext);
+  
   return (
     <div>
       <Routes>

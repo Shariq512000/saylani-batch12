@@ -1,14 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { GlobalContext } from '../context/Context';
 
 const Category = () => {
+
+  let {state} = useContext(GlobalContext)
+
   const [categoryList , setCategoryList] = useState([]);
   const [showForm , setShowForm] = useState(false);
   const [categoryName , setCategoryName] = useState("");
   const [categoryDescription , setCategoryDescription] = useState("");
   const getCategory = async() => {
     try {
-      let res = await axios.get('http://localhost:5004/categories');
+      let res = await axios.get(`${state.baseUrl}/categories`);
       setCategoryList(res.data.category_list);
     } catch (error) {
       console.log("error" , error);

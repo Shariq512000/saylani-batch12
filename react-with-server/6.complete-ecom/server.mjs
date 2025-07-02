@@ -30,9 +30,9 @@ app.use(cors());
 //     }
 // });
 
-// axios.get('/abc')
+// axios.get('/user-detail', {abc: 123})
 
-app.post('/sign-up' , async(req, res) => {
+app.post('/api/v1/sign-up' , async(req, res) => {
     let reqBody = req.body;
     if(!reqBody.firstName || !reqBody.lastName || !reqBody.email || !reqBody.password){
         res.status(400).send({message: "required parameter missing"})
@@ -62,7 +62,7 @@ app.post('/sign-up' , async(req, res) => {
     }
 })
 
-app.post('/login' , async(req , res) => {
+app.post('/api/v1/login' , async(req , res) => {
     let reqBody = req.body;
     if(!reqBody.email || !reqBody.password){
         res.status(400).send({message: "Required Parameter Missing"})
@@ -120,7 +120,16 @@ app.post('/login' , async(req , res) => {
     }
 })
 
-app.use('/*splat' , (req, res, next) => {
+app.get('/api/v1/logout', (req, res) => {
+    res.cookie('Token', '', {
+        maxAge: 1,
+        httpOnly: true,
+        // sameSite: "none",
+        secure: true
+    });
+})
+
+app.use('/api/v1/*splat' , (req, res, next) => {
     if (!req?.cookies?.Token) {
         res.status(401).send({
             message: "Unauthorized"
@@ -141,7 +150,7 @@ app.use('/*splat' , (req, res, next) => {
                 res.cookie('Token', '', {
                     maxAge: 1,
                     httpOnly: true,
-                    sameSite: "none",
+                    // sameSite: "none",
                     secure: true
                 });
                 res.send({ message: "token expired" })
@@ -151,15 +160,39 @@ app.use('/*splat' , (req, res, next) => {
                 console.log("token approved");
 
                 req.body.token = decodedData
+                // method: get
+                // url: '/user-detail'
+                // body: {abc: 123, token: decodedData}
                 next();
             }
         } else {
-            res.status(401).send("invalid token")
+            res.status(401).send({message: "invalid token"})
         }
     });
 })
 
-app.get('/categories' , async(req , res) => {
+app.get('/api/v1/user-detail' , async(req, res) => {
+    let userToken = req.body.token;
+    let query = `SELECT * FROM users WHERE user_id = $1`;
+    let value = [userToken.id]
+    try {
+        let result = await db.query(query, value)
+        res.status(200).send({message: "User Found" , user: {
+            user_id: result.rows[0].user_id,
+            first_name: result.rows[0].first_name,
+            last_name: result.rows[0].last_name,
+            email: result.rows[0].email,
+            phone: result.rows[0].phone,
+            user_role: result.rows[0].user_role,
+            profile: result.rows[0].profile,
+        }})
+    } catch (error) {
+        console.log("Error", error);
+        res.status(500).send({message: "Internal Server Error"})
+    }
+})
+
+app.get('/api/v1/categories' , async(req , res) => {
     try {
         let result = await db.query(`SELECT * FROM categories`);
         res.status(200).send({message: "Categories Found" , category_list: result.rows})
@@ -168,7 +201,30 @@ app.get('/categories' , async(req , res) => {
     }
 })
 
-app.post('/category' , async(req , res) => {
+app.get('/api/v1/products', async(req , res) => {
+    try {
+        let result = await db.query(`SELECT p.product_id, p.product_name, p.price, p.product_image, p.description, p.created_at, c.category_name 
+        FROM products AS p 
+        INNER JOIN categories c ON p.category_id = c.category_id`);
+        res.status(200).send({message: "Product Found" , products: result.rows})
+    } catch (error) {
+        console.log("error" , error)
+        res.status(500).send({message: "Internal Server Error"})
+    }
+})
+
+app.use('/api/v1/*splat' , (req, res, next) => {
+    if (req.body.token.user_role != 1) {
+        res.status(401).send({
+            message: "Unauthorized"
+        })
+        return;
+    }else{
+        next();
+    }
+})
+
+app.post('/api/v1/category' , async(req , res) => {
     let reqBody = req.body
     if(!reqBody.name || !reqBody.description){
         res.status(400).send({message: "Required Parameter Missing"})
@@ -185,25 +241,7 @@ app.post('/category' , async(req , res) => {
     }
 })
 
-// let products = [{category_id: 1}];
-// p = products
-
-// let categories = [{category_id: 1, category_name: "abc"}, {category_id: 2, category_name: "def"}];
-// c = categories
-
-app.get('/products', async(req , res) => {
-    try {
-        let result = await db.query(`SELECT p.product_id, p.product_name, p.price, p.product_image, p.description, p.created_at, c.category_name 
-        FROM products AS p 
-        INNER JOIN categories c ON p.category_id = c.category_id`);
-        res.status(200).send({message: "Product Found" , products: result.rows})
-    } catch (error) {
-        console.log("error" , error)
-        res.status(500).send({message: "Internal Server Error"})
-    }
-})
-
-app.post('/product' , async(req , res) => {
+app.post('/api/v1/product' , async(req , res) => {
     // let reqBody = req.body
     let {name, description, price, category_id, image} = req.body;
     if(!name || !description || !price || !category_id || !image){
@@ -220,6 +258,12 @@ app.post('/product' , async(req , res) => {
         res.status(500).send({message: "Internal Server Error", error})
     }
 })
+
+// let products = [{category_id: 1}];
+// p = products
+
+// let categories = [{category_id: 1, category_name: "abc"}, {category_id: 2, category_name: "def"}];
+// c = categories
 
 const __dirname = path.resolve();//'D:\Shariq Siddiqui\saylani-batch12\react-with-server\6.complete-ecom'
 // const fileLocation = path.join(__dirname, './web/build')
