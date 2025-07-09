@@ -5,7 +5,7 @@ export const GlobalContext = createContext("Initial Value");
 
 let data = {
     user: {},
-    isLogin: false,
+    isLogin: null,
     baseUrl: 'http://localhost:5004/api/v1'
 }
 

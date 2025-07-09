@@ -12,14 +12,19 @@ const app = express();
 const PORT = 5004;
 
 const SECRET = process.env.SECRET_TOKEN;
+// app.use(cors());
+// app.use(cors({
+//     origin: ["http://localhost:3000" , "*"]
+// }))
+// app.use(cors());
+
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
-// app.use(cors({
-//     origin: ["http://localhost/3000" , ""]
-// }))
-// app.use(cors());
 
 // app.get('/' , async(req , res) => {
 //     try {
@@ -31,6 +36,8 @@ app.use(cors());
 // });
 
 // axios.get('/user-detail', {abc: 123})
+
+// axios.post('/api/v1/category', {name: "abc", description: "des"})
 
 app.post('/api/v1/sign-up' , async(req, res) => {
     let reqBody = req.body;
@@ -130,6 +137,7 @@ app.get('/api/v1/logout', (req, res) => {
 })
 
 app.use('/api/v1/*splat' , (req, res, next) => {
+    // console.log("req?.cookies?.Token" , req?.cookies?.Token);
     if (!req?.cookies?.Token) {
         res.status(401).send({
             message: "Unauthorized"
@@ -140,7 +148,7 @@ app.use('/api/v1/*splat' , (req, res, next) => {
     jwt.verify(req.cookies.Token, SECRET, (err, decodedData) => {
         if (!err) {
 
-            console.log("decodedData: ", decodedData);
+            // console.log("decodedData: ", decodedData);
 
             const nowDate = new Date().getTime() / 1000;
 
@@ -158,8 +166,11 @@ app.use('/api/v1/*splat' , (req, res, next) => {
             } else {
 
                 console.log("token approved");
-
-                req.body.token = decodedData
+                // {name: "abc", description: "des"}
+                req.body = {
+                    ...req.body,
+                    token: decodedData
+                }
                 // method: get
                 // url: '/user-detail'
                 // body: {abc: 123, token: decodedData}
@@ -169,6 +180,11 @@ app.use('/api/v1/*splat' , (req, res, next) => {
             res.status(401).send({message: "invalid token"})
         }
     });
+})
+
+app.get('/api/v1/profile' , (req, res) => {
+    console.log("reqBody", req.body);
+    res.status(200).send({message: "user found"})
 })
 
 app.get('/api/v1/user-detail' , async(req, res) => {
@@ -202,6 +218,9 @@ app.get('/api/v1/categories' , async(req , res) => {
 })
 
 app.get('/api/v1/products', async(req , res) => {
+
+    console.log("reqBody" , req.body);
+
     try {
         let result = await db.query(`SELECT p.product_id, p.product_name, p.price, p.product_image, p.description, p.created_at, c.category_name 
         FROM products AS p 
@@ -209,7 +228,7 @@ app.get('/api/v1/products', async(req , res) => {
         res.status(200).send({message: "Product Found" , products: result.rows})
     } catch (error) {
         console.log("error" , error)
-        res.status(500).send({message: "Internal Server Error"})
+        res.status(500).send({message: "Internal Server Error", err: error})
     }
 })
 

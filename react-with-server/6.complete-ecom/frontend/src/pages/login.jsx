@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router';
 import { GlobalContext } from '../context/Context';
+import api from '../component/api';
 
 const Login = () => {
 
@@ -15,7 +16,7 @@ const Login = () => {
     const loginUser = async(e) => {
         e.preventDefault();
         try {
-            let res = await axios.post(`${state.baseUrl}/login`, {
+            let res = await api.post(`/login`, {
                 email: email,
                 password: password
             })

@@ -2,22 +2,30 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router';
 import { GlobalContext } from '../context/Context';
+import api from '../component/api';
 
 const Home = () => {
   const [products , setProducts] = useState([]);
   let {state} = useContext(GlobalContext)
   useEffect(() => {
     const getProduct = async() => {
-      let res = await axios.get(`${state.baseUrl}/products`);
-      console.log("res" , res.data)
-      setProducts(res.data.products)
+      try {
+        let res = await api.get(`/products`, {
+          withCredentials: true
+        });
+        console.log("res" , res.data)
+        setProducts(res.data.products)
+        
+      } catch (error) {
+        console.log("Error" , error)
+      }
     }
     getProduct()
   } , [])
   return (
     <div>
       {
-        (state.user.user_role == 1)?
+        (state.user?.user_role == 1)?
         <div className=""><Link to={'/add-product'}>Add Product</Link></div>
         :
         null
