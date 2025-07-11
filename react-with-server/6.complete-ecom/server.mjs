@@ -134,6 +134,7 @@ app.get('/api/v1/logout', (req, res) => {
         // sameSite: "none",
         secure: true
     });
+    res.status(200).send({message: "User Logout"})
 })
 
 app.use('/api/v1/*splat' , (req, res, next) => {
