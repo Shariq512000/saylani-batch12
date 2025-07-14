@@ -9,3 +9,13 @@ const userSchema = new mongoose.Schema({
 });
 
 export const userModel = mongoose.model('Users', userSchema);
+
+const messageSchema = new mongoose.Schema({
+    from: { type: mongoose.ObjectId, ref: 'Users', required: true },
+    to: { type: mongoose.ObjectId, ref: 'Users', required: true },
+    text: {type: String, required: true},
+    imageUrl: {type: String},
+    createdOn: { type: Date, default: Date.now }
+});
+
+export const messageModel = mongoose.model('Messages', messageSchema);

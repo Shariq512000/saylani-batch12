@@ -7,10 +7,10 @@ import jwt from 'jsonwebtoken';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
-import { userModel } from './model.mjs';
+import { messageModel, userModel } from './model.mjs';
 
 const app = express();
-const PORT = 5004;
+const PORT = 5005;
 
 mongoose.connect(process.env.MONGODBURI)
   .then(() => console.log('Connected!')).catch((err) => console.log("Err", err));
@@ -117,52 +117,83 @@ app.get('/api/v1/logout', (req, res) => {
     res.status(200).send({message: "User Logout"})
 })
 
-// app.use('/api/v1/*splat' , (req, res, next) => {
-//     if (!req?.cookies?.Token) {
-//         res.status(401).send({
-//             message: "Unauthorized"
-//         })
-//         return;
-//     }
+app.use('/api/v1/*splat' , (req, res, next) => {
+    if (!req?.cookies?.Token) {
+        res.status(401).send({
+            message: "Unauthorized"
+        })
+        return;
+    }
 
-//     jwt.verify(req.cookies.Token, SECRET, (err, decodedData) => {
-//         if (!err) {
+    jwt.verify(req.cookies.Token, SECRET, (err, decodedData) => {
+        if (!err) {
 
-//             const nowDate = new Date().getTime() / 1000;
+            const nowDate = new Date().getTime() / 1000;
 
-//             if (decodedData.exp < nowDate) {
+            if (decodedData.exp < nowDate) {
 
-//                 res.status(401);
-//                 res.cookie('Token', '', {
-//                     maxAge: 1,
-//                     httpOnly: true,
-//                     // sameSite: "none",
-//                     secure: true
-//                 });
-//                 res.send({ message: "token expired" })
+                res.status(401);
+                res.cookie('Token', '', {
+                    maxAge: 1,
+                    httpOnly: true,
+                    // sameSite: "none",
+                    secure: true
+                });
+                res.send({ message: "token expired" })
 
-//             } else {
+            } else {
 
-//                 console.log("token approved");
-//                 req.body = {
-//                     ...req.body,
-//                     token: decodedData
-//                 }
-//                 next();
-//             }
-//         } else {
-//             res.status(401).send({message: "invalid token"})
-//         }
-//     });
-// });
+                console.log("token approved");
+                req.body = {
+                    ...req.body,
+                    token: decodedData
+                }
+                next();
+            }
+        } else {
+            res.status(401).send({message: "invalid token"})
+        }
+    });
+});
+
+app.get('/api/v1/profile', async(req , res) => {
+    let userId = req.body.token.id
+    try {
+        let user = await userModel.findById(userId, {password: 0});
+        res.send({message: "User Logged in" , user: {
+            user_id: user._id,
+            first_name: user.firstName,
+            last_name: user.lastName,
+            email: user.email
+        }})
+    } catch (error) {
+        console.log("Error", error)
+        res.status(500).send({message: "Internal Server Error"})
+    }
+})
 
 app.get('/api/v1/users', async(req, res) => {
     try {
-        let result = await userModel.find({}, "firstName lastName email _id")
+        let result = await userModel.find({}, {password: 0})
         console.log("Result", result);
         res.status(200).send({message: "user found", users: result})
     } catch (error) {
         console.log("Error", error)
+        res.status(500).send({message: "Internal Server Error"})
+    }
+})
+
+app.post('/api/v1/chat/:id', async(req, res) => {
+    let receiverId = req.params.id;
+    let senderId = req.body.token.id
+    try {
+        let result = await messageModel.create({
+            from: senderId,
+            to: receiverId,
+            text: req.body.message
+        })
+        res.send({message: "Message Send"})
+    } catch (error) {
         res.status(500).send({message: "Internal Server Error"})
     }
 })
