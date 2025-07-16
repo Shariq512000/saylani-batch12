@@ -1,3 +1,37 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.messageWrapper{
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  padding: 10px 30px;
+}
+.conversation{
+  background-color: #E9E8EE;
+  border-radius: 8px 8px 8px 0;
+  padding: 10px;
+  min-width: 25%;
+  max-width: 50%;
+}
+
+.myMessage{
+  border-radius: 8px 8px 0 8px;
+  background-color: #0088FE;
+  align-self: flex-end;
+}
+
+.conversation span {
+  font-size: 10px;
+}
+
+.conversation p{
+  /* text-wrap: wrap; */
+  /* white-space: wrap; */
+  word-wrap: break-word;
+}
+
 .App {
   text-align: center;
 }

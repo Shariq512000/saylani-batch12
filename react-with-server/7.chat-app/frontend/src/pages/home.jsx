@@ -29,7 +29,7 @@ const Home = () => {
           <Link to={`/chat/${eachUser?._id}`} style={{width: 320, border: "1px solid black", borderRadius: 8, padding: 20, marginBottom: 20, display: "block", color: "black"}}>
             {/* <img style={{width: "100%"}} src={eachProduct.product_image} alt="" />
             <br /> */}
-            <h1>{eachUser?.firstName} {eachUser?.lastName}</h1>
+            <h1>{eachUser?.firstName} {eachUser?.lastName} {(eachUser?._id == state.user.user_id) ? "(You)" : ""}</h1>
             <h6>{eachUser?.email}</h6>
             {/* <p>{eachUser?.createdOn}</p> */}
           </Link>

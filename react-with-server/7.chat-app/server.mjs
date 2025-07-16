@@ -1,13 +1,16 @@
 import 'dotenv/config'
 import express from 'express';
 import cors from 'cors';
-import bcrypt from "bcryptjs";
 import { customAlphabet } from 'nanoid';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import { messageModel, userModel } from './model.mjs';
+import authApi from './api/auth.mjs';
+import messageApi from './api/message.mjs';
+
+// import {router} form './api/auth'
 
 const app = express();
 const PORT = 5005;
@@ -25,97 +28,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.post('/api/v1/sign-up' , async(req, res) => {
-    let reqBody = req.body;
-    if(!reqBody.firstName || !reqBody.lastName || !reqBody.email || !reqBody.password){
-        res.status(400).send({message: "required parameter missing"})
-        return;
-    }
-    reqBody.email = reqBody.email.toLowerCase();
-    try {
-        let user = await userModel.findOne({email: reqBody.email})
-        console.log("user", user)
-        if(!user){
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync(reqBody.password, salt);
-            let result = await userModel.create({
-                firstName: reqBody.firstName,
-                lastName: reqBody.lastName,
-                email: reqBody.email,
-                password: hash
-            })
-            res.status(201).send({message: "User Created"})
-        }else{
-            res.status(400).send({message: "User Already Exist With This Email"})
-        }
-    } catch (error) {
-        console.log("ERROR" , error);
-        res.status(500).send({message: "Internal Server Error"})
-    }
-})
-
-app.post('/api/v1/login' , async(req , res) => {
-    let reqBody = req.body;
-    if(!reqBody.email || !reqBody.password){
-        res.status(400).send({message: "Required Parameter Missing"})
-        return;
-    }
-    reqBody.email = reqBody.email.toLowerCase();
-
-    try {
-        let user = await userModel.findOne({email: reqBody.email})
-        // console.log("user", user)
-        if(!user){
-            res.status(400).send({message: "User Not Found With This Email"});
-            return;
-        }
-        // let user = result.rows[0]
-        // console.log("Result" , result.rows);
-        let isMatched = await bcrypt.compare(reqBody.password, user.password); // true
-
-        if(!isMatched){
-            res.status(401).send({message: "Password did not Matched"});
-            return;
-        }
-
-        let token = jwt.sign({
-            id: user._id,
-            firstName: user.firstName,
-            last_name: user.lastName,
-            email: user.email,
-            iat: Date.now() / 1000,
-            exp: (Date.now() / 1000) + (60*60*24)
-        }, SECRET);
-
-        res.cookie('Token', token, {
-            maxAge: 86400000, // 1 day
-            httpOnly: true,
-            secure: true
-        });
-        res.status(200)
-        res.send({message: "User Logged in" , user: {
-            user_id: user._id,
-            first_name: user.firstName,
-            last_name: user.lastName,
-            email: user.email,
-        }})
-        // res.status(200).send({message: "Testing" , result: result.rows, isMatched})
-
-    } catch (error) {
-        console.log("Error", error)
-        res.status(500).send({message: "Internal Server Error"})
-    }
-})
-
-app.get('/api/v1/logout', (req, res) => {
-    res.cookie('Token', '', {
-        maxAge: 1,
-        httpOnly: true,
-        // sameSite: "none",
-        secure: true
-    });
-    res.status(200).send({message: "User Logout"})
-})
+app.use('/api/v1', authApi)
 
 app.use('/api/v1/*splat' , (req, res, next) => {
     if (!req?.cookies?.Token) {
@@ -183,20 +96,7 @@ app.get('/api/v1/users', async(req, res) => {
     }
 })
 
-app.post('/api/v1/chat/:id', async(req, res) => {
-    let receiverId = req.params.id;
-    let senderId = req.body.token.id
-    try {
-        let result = await messageModel.create({
-            from: senderId,
-            to: receiverId,
-            text: req.body.message
-        })
-        res.send({message: "Message Send"})
-    } catch (error) {
-        res.status(500).send({message: "Internal Server Error"})
-    }
-})
+app.use('/api/v1', messageApi)
 
 app.listen(PORT, () => {
     console.log("Server is Running")
