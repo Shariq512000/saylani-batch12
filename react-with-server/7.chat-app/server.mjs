@@ -9,11 +9,16 @@ import mongoose from 'mongoose';
 import { messageModel, userModel } from './model.mjs';
 import authApi from './api/auth.mjs';
 import messageApi from './api/message.mjs';
+import { Server } from 'socket.io';
+import { createServer } from 'http';
 
 // import {router} form './api/auth'
 
 const app = express();
 const PORT = 5005;
+
+const server = createServer(app);
+const io = new Server(server, { cors: { origin: "*", methods: "*"} });
 
 mongoose.connect(process.env.MONGODBURI)
   .then(() => console.log('Connected!')).catch((err) => console.log("Err", err));
@@ -70,10 +75,22 @@ app.use('/api/v1/*splat' , (req, res, next) => {
 });
 
 app.get('/api/v1/profile', async(req , res) => {
-    let userId = req.body.token.id
+
+    let queryUserId;
+
+    if(req.query.user_id){
+
+        queryUserId = req.query.user_id
+
+    }else{
+
+        queryUserId = req.body.token.id
+
+    }
+
     try {
-        let user = await userModel.findById(userId, {password: 0});
-        res.send({message: "User Logged in" , user: {
+        let user = await userModel.findById(queryUserId, {password: 0});
+        res.send({message: "User Found" , user: {
             user_id: user._id,
             first_name: user.firstName,
             last_name: user.lastName,
@@ -96,9 +113,30 @@ app.get('/api/v1/users', async(req, res) => {
     }
 })
 
-app.use('/api/v1', messageApi)
+app.use('/api/v1', messageApi(io))
 
-app.listen(PORT, () => {
+io.on('connection', (socket) => {
+    console.log('a user connected', socket.id);
+
+    socket.on("disconnect", (reason) => {
+        console.log("Client disconnected:", socket.id, "Reason:", reason);
+    });
+
+});
+
+// setInterval(() => {
+
+//     io.emit("Test topic", { event: "ADDED_ITEM", data: "some data" });
+//     // console.log("emiting data to all client");
+
+// }, 2000)
+
+const __dirname = path.resolve();//'D:\Shariq Siddiqui\saylani-batch12\react-with-server\6.complete-ecom'
+// const fileLocation = path.join(__dirname, './web/build')
+app.use('/', express.static(path.join(__dirname, './frontend/build')))
+app.use("/*splat" , express.static(path.join(__dirname, './frontend/build')))
+
+server.listen(PORT, () => {
     console.log("Server is Running")
 })
 

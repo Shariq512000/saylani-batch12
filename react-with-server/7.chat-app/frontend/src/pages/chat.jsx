@@ -3,11 +3,13 @@ import { useParams } from 'react-router'
 import api from '../component/api';
 import moment from 'moment';
 import { GlobalContext } from '../context/Context';
+import io from 'socket.io-client';
 
 const Chat = () => {
     let {state, dispatch} = useContext(GlobalContext);
     const [message , setMessage] = useState("");
     const [conversations , setConversations] = useState([]);
+    const [userDetail , setUserDetail] = useState({})
     // /api/v1/chat/:id
     const {id} = useParams();
 
@@ -22,9 +24,47 @@ const Chat = () => {
         }
     }
 
+    const getUserDetail = async() => {
+        try {
+            let response = await api.get(`/profile?user_id=${id}`);
+            console.log("conversation", response)
+            setUserDetail(response.data?.user)
+        } catch (error) {
+            console.log("Error", error);
+        }
+    }
+
     useEffect(() => {
         getConversation();
+        getUserDetail();
     } , [])
+
+    useEffect(() => {
+        const socket = io("");
+    
+        socket.on('connect', () => {
+            console.log("Connected to server");
+        });
+    
+        socket.on(`${id}-${state.user.user_id}`, (data) => {
+            console.log("Received:", data);
+            setConversations(prev => [...prev, data])
+            // getConversation();
+        });
+    
+        socket.on('disconnect', (reason) => {
+            console.log("Disconnected. Reason:", reason);
+        });
+
+        socket.on('error', (error) => {
+            console.log("Error:", error);
+        });
+    
+        return () => {
+            console.log("Component unmount")
+            socket.close();  // cleanup on unmount
+        };
+    }, []);
     
     const sendMessage = async(e) => {
         e.preventDefault();
@@ -32,13 +72,20 @@ const Chat = () => {
             let res = await api.post(`chat/${id}`, {message: message})
             console.log(res.data);
             setMessage("");
-            getConversation();
+            setConversations(prev => [...prev, res.data.chat])
         } catch (error) {
             console.log("Error" , error)
         }
     }
+    console.log("userDetail" , userDetail)
   return (
     <div>
+        <div className="">
+            <h1>
+                {userDetail?.first_name} {userDetail?.last_name}
+            </h1>
+            <p>{userDetail?.email}</p>
+        </div>
         <div className="messageWrapper">
             {conversations?.map((eachMessage, i) => {
                 return(
