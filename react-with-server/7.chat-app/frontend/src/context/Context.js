@@ -6,7 +6,8 @@ export const GlobalContext = createContext("Initial Value");
 let data = {
     user: {},
     isLogin: null,
-    baseUrl: 'http://localhost:5004/api/v1'
+    baseUrl: 'http://localhost:5004/api/v1',
+    baseSocketIo:  window.location.href.split(":")[0] == "http" ? "http://localhost:5005" : ""
 }
 
 export default function ContextProvider({ children }) {

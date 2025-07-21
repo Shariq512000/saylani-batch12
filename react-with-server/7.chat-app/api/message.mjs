@@ -14,9 +14,14 @@ export default function(io){
                 to: receiverId,
                 text: req.body.message
             })
-            io.emit(`${senderId}-${receiverId}`, result)
+            let conversation = await messageModel.findById(result._id)
+            .populate({path: 'from', select: "firstName lastName email"})
+            .populate({path: 'to', select: "firstName lastName email"})
+            .exec();
+            io.emit(`${senderId}-${receiverId}`, conversation)
+            io.emit(`personal-channel-${receiverId}`, conversation)
             
-            res.send({message: "Message Sent", chat: result})
+            res.send({message: "Message Sent", chat: conversation})
         } catch (error) {
             res.status(500).send({message: "Internal Server Error"})
         }
@@ -38,6 +43,9 @@ export default function(io){
                     }
                 ]
             })
+            .populate({path: 'from', select: "firstName lastName email"})
+            .populate({path: 'to', select: "firstName lastName email"})
+            .exec();
             res.send({message: "Message Found", conversation: conversation})
         } catch (error) {
             res.status(500).send({message: "Internal Server Error"})

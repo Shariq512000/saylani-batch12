@@ -40,7 +40,7 @@ const Chat = () => {
     } , [])
 
     useEffect(() => {
-        const socket = io("");
+        const socket = io(state.baseSocketIo);
     
         socket.on('connect', () => {
             console.log("Connected to server");
@@ -89,7 +89,8 @@ const Chat = () => {
         <div className="messageWrapper">
             {conversations?.map((eachMessage, i) => {
                 return(
-                    <div key={i} className={`conversation ${(eachMessage?.from == state.user.user_id) ? "myMessage" : ""}`}>
+                    <div key={i} className={`conversation ${(eachMessage?.from?._id == state.user.user_id) ? "myMessage" : ""}`}>
+                        <p><b>{eachMessage?.from?.firstName} {eachMessage?.from?.lastName}</b></p>
                         <p>
                             {eachMessage?.text}
                         </p>
