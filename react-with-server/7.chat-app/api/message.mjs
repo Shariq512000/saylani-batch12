@@ -20,6 +20,8 @@ export default function(io){
             .exec();
             io.emit(`${senderId}-${receiverId}`, conversation)
             io.emit(`personal-channel-${receiverId}`, conversation)
+
+            //personal-channel-fahad-id
             
             res.send({message: "Message Sent", chat: conversation})
         } catch (error) {

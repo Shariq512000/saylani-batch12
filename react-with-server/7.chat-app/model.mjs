@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
     createdOn: { type: Date, default: Date.now },
 });
 
+userSchema.index({firstName: 'text', lastName: 'text'});
+
 export const userModel = mongoose.model('Users', userSchema);
 
 const messageSchema = new mongoose.Schema({

@@ -11,6 +11,7 @@ import authApi from './api/auth.mjs';
 import messageApi from './api/message.mjs';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
+import cookie from 'cookie'
 
 // import {router} form './api/auth'
 
@@ -103,8 +104,14 @@ app.get('/api/v1/profile', async(req , res) => {
 })
 
 app.get('/api/v1/users', async(req, res) => {
+    const userName = req.query.user
     try {
-        let result = await userModel.find({}, {password: 0})
+        let result
+        if(userName){
+           result = await userModel.find({$text: {$search: userName}}, {password: 0}).limit(20).skip(10)
+        }else{
+            result = await userModel.find({}, {password: 0}).limit(20).skip(10)
+        }
         console.log("Result", result);
         res.status(200).send({message: "user found", users: result})
     } catch (error) {
@@ -116,7 +123,24 @@ app.get('/api/v1/users', async(req, res) => {
 app.use('/api/v1', messageApi(io))
 
 io.on('connection', (socket) => {
-    console.log('a user connected', socket.id);
+    // console.log('a user connected', socket.id);
+    let userCookie = cookie.parse(socket.header.cookies)    
+
+    if (!userCookie.Token) {
+        socket.disconnect();
+    }
+
+    jwt.verify(userCookie.Token, SECRET, (err, decodedData) => {
+        if (!err) {
+
+            if (decodedData.exp < nowDate) {
+                socket.disconnect()
+            } else {
+            }
+        } else {
+            socket.disconnect()
+        }
+    });
 
     socket.on("disconnect", (reason) => {
         console.log("Client disconnected:", socket.id, "Reason:", reason);

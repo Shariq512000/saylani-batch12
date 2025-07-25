@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Navigate, Route, Routes } from 'react-router';
+import { Link, Navigate, Route, Routes } from 'react-router';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import Home from './pages/home';
@@ -30,7 +30,7 @@ function App() {
   } , [])
 
   useEffect(() => {
-    const socket = io(state.baseSocketIo);
+    const socket = io(state.baseSocketIo , {withCredentials: true});
 
     if(state.isLogin){
 
@@ -40,6 +40,7 @@ function App() {
       });
   
       socket.on(`personal-channel-${state.user.user_id}`, (data) => {
+        // personal-channel-fahad-id
         console.log("Received: App", data);
         setNotifications(prev => [...prev, data])
       });
@@ -58,6 +59,16 @@ function App() {
       socket.close();  // cleanup on unmount
     };
   }, [state.user.user_id]);
+
+  const dismissNotification = (msg) => {
+    // msg?._id
+    setNotifications((prev) => prev.filter((item) => item?._id != msg?._id))
+
+    // let arr = ["1" , "2", "3"];
+    // arr.map((item) => console.log(item))
+    // let newArr = arr.filter((item) => item == "2")
+    // newArr = ["2"]
+  }
 
   return (
     <div>
@@ -85,12 +96,15 @@ function App() {
       }
       <div className="notificationWrapper">
         {notifications?.map((eachMsg, i) => (
-          <div key={i} className="notification">
-            <h1>{eachMsg?.from?.firstName} {eachMsg?.from?.lastName}</h1>
-            <p>{eachMsg?.text}</p>
-            <span>
-              {moment(eachMsg?.createdOn).fromNow()}
-            </span>
+          <div key={i} className="">
+            <div className="" onClick={() => {dismissNotification(eachMsg)}}>X</div>
+            <Link to={`/chat/${eachMsg?.from?._id}`} className="notification">
+              <h1>{eachMsg?.from?.firstName} {eachMsg?.from?.lastName}</h1>
+              <p>{eachMsg?.text}</p>
+              <span>
+                {moment(eachMsg?.createdOn).fromNow()}
+              </span>
+            </Link>
           </div>
         ))}
       </div>

@@ -40,7 +40,7 @@ const Chat = () => {
     } , [])
 
     useEffect(() => {
-        const socket = io(state.baseSocketIo);
+        const socket = io(state.baseSocketIo , {withCredentials: true});
     
         socket.on('connect', () => {
             console.log("Connected to server");
