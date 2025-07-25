@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Link, Navigate, Route, Routes } from 'react-router';
+import { Link, Navigate, Route, Routes, useNavigate } from 'react-router';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import Home from './pages/home';
@@ -15,6 +15,8 @@ function App() {
   let {state, dispatch} = useContext(GlobalContext);
 
   const [notifications , setNotifications] = useState([])
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserData = async() => {
@@ -70,6 +72,11 @@ function App() {
     // newArr = ["2"]
   }
 
+  const pushToChat = (eachMsg) => {
+    navigate(`/chat/${eachMsg?.from?._id}`)
+    dismissNotification(eachMsg)
+  }
+
   return (
     <div>
       {(state.isLogin == true)?
@@ -98,13 +105,13 @@ function App() {
         {notifications?.map((eachMsg, i) => (
           <div key={i} className="">
             <div className="" onClick={() => {dismissNotification(eachMsg)}}>X</div>
-            <Link to={`/chat/${eachMsg?.from?._id}`} className="notification">
+            <div className="notification" onClick={() => {pushToChat(eachMsg)}}>
               <h1>{eachMsg?.from?.firstName} {eachMsg?.from?.lastName}</h1>
               <p>{eachMsg?.text}</p>
               <span>
                 {moment(eachMsg?.createdOn).fromNow()}
               </span>
-            </Link>
+            </div>
           </div>
         ))}
       </div>

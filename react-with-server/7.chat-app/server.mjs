@@ -19,7 +19,7 @@ const app = express();
 const PORT = 5005;
 
 const server = createServer(app);
-const io = new Server(server, { cors: { origin: "*", methods: "*"} });
+const io = new Server(server, { cors: { origin: "http://localhost:3000", credentials: true, methods: "*"} });
 
 mongoose.connect(process.env.MONGODBURI)
   .then(() => console.log('Connected!')).catch((err) => console.log("Err", err));
@@ -108,9 +108,9 @@ app.get('/api/v1/users', async(req, res) => {
     try {
         let result
         if(userName){
-           result = await userModel.find({$text: {$search: userName}}, {password: 0}).limit(20).skip(10)
+           result = await userModel.find({$text: {$search: userName}}, {password: 0})
         }else{
-            result = await userModel.find({}, {password: 0}).limit(20).skip(10)
+            result = await userModel.find({}, {password: 0})
         }
         console.log("Result", result);
         res.status(200).send({message: "user found", users: result})
@@ -124,23 +124,30 @@ app.use('/api/v1', messageApi(io))
 
 io.on('connection', (socket) => {
     // console.log('a user connected', socket.id);
-    let userCookie = cookie.parse(socket.header.cookies)    
-
-    if (!userCookie.Token) {
-        socket.disconnect();
-    }
-
-    jwt.verify(userCookie.Token, SECRET, (err, decodedData) => {
-        if (!err) {
-
-            if (decodedData.exp < nowDate) {
-                socket.disconnect()
-            } else {
-            }
-        } else {
-            socket.disconnect()
+    console.log(socket?.handshake?.headers?.cookie);
+    let userCookie;
+    if(socket?.handshake?.headers?.cookie){
+        userCookie = cookie.parse(socket?.handshake?.headers?.cookie);
+        console.log(userCookie);
+    
+        if (!userCookie?.Token) {
+            socket.disconnect();
         }
-    });
+    
+        jwt.verify(userCookie.Token, SECRET, (err, decodedData) => {
+            if (!err) {
+                const nowDate = new Date().getTime() / 1000;
+    
+                if (decodedData.exp < nowDate) {
+                    socket.disconnect()
+                } else {
+    
+                }
+            } else {
+                socket.disconnect()
+            }
+        });
+    }
 
     socket.on("disconnect", (reason) => {
         console.log("Client disconnected:", socket.id, "Reason:", reason);
